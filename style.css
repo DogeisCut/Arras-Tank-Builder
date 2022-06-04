@@ -1,0 +1,310 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(74, 132, 207);
+  font: 12px ubuntu, sans-serif;
+    font-weight: 600;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, -1px -1px black, -1px 1px black, 1px 1px black, 1px -1px black;
+    border: none;
+    margin: 5px;
+}
+canvas {
+  padding: 0;
+  margin: auto;
+  display: block;
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  outline: rgb(43, 43, 43) solid 3px;
+}
+
+textarea {
+  background-color: #f8f8f8;
+  color: black;
+  resize: none;
+  width: 400px;
+  height: 300px;
+  line-height: 14px;
+  font: 12px/16px ubuntu, sans-serif;
+  font-weight: 600;
+  border: 2px solid black;
+  border-radius: 3px;
+  user-select: text;
+  padding: 1px;
+  -moz-user-select: text;
+  -webkit-user-select: text;
+  -ms-user-select: text;
+}
+
+input {
+  background-color: #f8f8f8;
+  color: black;
+  resize: none;
+  line-height: 14px;
+  font: 12px/16px ubuntu, sans-serif;
+  font-weight: 600;
+  border: 2px solid black;
+  border-radius: 3px;
+  user-select: text;
+  padding: 1px;
+  -moz-user-select: text;
+  -webkit-user-select: text;
+  -ms-user-select: text;
+}
+
+select {
+  background-color: #f8f8f8;
+  color: black;
+  resize: none;
+  line-height: 14px;
+  font: 12px/16px ubuntu, sans-serif;
+  font-weight: 600;
+  border: 2px solid black;
+  border-radius: 3px;
+  user-select: text;
+  padding: 1px;
+  -moz-user-select: text;
+  -webkit-user-select: text;
+  -ms-user-select: text;
+}
+
+button, input {
+  overflow: visible;
+}
+
+button, input, optgroup, select, textarea {
+  font-family: sans-serif;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+}
+
+button {
+  border-radius: 0;
+}
+
+/*Color Buttons*/
+/* 
+        "teal": "#7ADBBC",
+        "lgreen": "#B9E87E",
+        "orange": "#E7896D",
+        "yellow": "#FDF380",
+        "lavender": "#B58EFD",
+        "pink": "#EF99C3",
+        "vlgrey": "#E8EBF7",
+        "lgrey": "#AA9F9E",
+        "guiwhite": "#FFFFFF",
+        "black": "#484848",
+        "blue": "#3CA4CB",
+        "green": "#8ABC3F",
+        "red": "#E03E41",
+        "gold": "#EFC74B",
+        "purple": "#8D6ADF",
+        "magenta": "#CC669C",
+        "grey": "#A7A7AF",
+        "dgrey": "#726F6F",
+        "white": "#DBDBDB",
+        "guiblack": "#000000",
+*/
+.presetteal {
+  top: 5px;
+  left: 84px;
+  padding: 0px;
+  border: 1px solid #555555;
+  height: 16px;
+  width: 16px;
+  background-color: #7ADBBC;
+}
+.presetlgreen {
+  top: 5px;
+  left: 98px;
+  padding: 0px;
+  border: 1px solid #555555;
+  height: 16px;
+  width: 16px;
+  background-color: #B9E87E;
+}
+.presetorange {
+  top: 5px;
+  left: 112px;
+  padding: 0px;
+  border: 1px solid #555555;
+  height: 16px;
+  width: 16px;
+  background-color: #E7896D;
+}
+.presetyellow {
+  top: 5px;
+  left: 126px;
+  padding: 0px;
+  border: 1px solid #555555;
+  height: 16px;
+  width: 16px;
+  background-color: #FDF380;
+}
+.presetlavender {
+  top: 5px;
+  left: 140px;
+  padding: 0px;
+  border: 1px solid #555555;
+  height: 16px;
+  width: 16px;
+  background-color: #B58EFD;
+}
+.presetpink {
+  top: 5px;
+  left: 154px;
+  padding: 0px;
+  border: 1px solid #555555;
+  height: 16px;
+  width: 16px;
+  background-color: #EF99C3;
+}
+.presetvlgrey {
+  top: 5px;
+  left: 168px;
+  padding: 0px;
+  border: 1px solid #555555;
+  height: 16px;
+  width: 16px;
+  background-color: #E8EBF7;
+}
+.presetlgrey {
+  top: 5px;
+  left: 182px;
+  padding: 0px;
+  border: 1px solid #555555;
+  height: 16px;
+  width: 16px;
+  background-color: #AA9F9E;
+}
+.presetguiwhite {
+  top: 5px;
+  left: 196px;
+  padding: 0px;
+  border: 1px solid #555555;
+  height: 16px;
+  width: 16px;
+  background-color: #FFFFFF;
+}
+.presetblack {
+  top: 5px;
+  left: 210px;
+  padding: 0px;
+  border: 1px solid #555555;
+  height: 16px;
+  width: 16px;
+  background-color: #484848;
+}
+.presetblue {
+  top: 5px;
+  left: 224px;
+  padding: 0px;
+  border: 1px solid #555555;
+  height: 16px;
+  width: 16px;
+  background-color: #3CA4CB;
+}
+.presetgreen {
+  top: 5px;
+  left: 238px;
+  padding: 0px;
+  border: 1px solid #555555;
+  height: 16px;
+  width: 16px;
+  background-color: #8ABC3F;
+}
+.presetred {
+  top: 5px;
+  left: 252px;
+  padding: 0px;
+  border: 1px solid #555555;
+  height: 16px;
+  width: 16px;
+  background-color: #E03E41;
+}
+.presetgold {
+  top: 5px;
+  left: 266px;
+  padding: 0px;
+  border: 1px solid #555555;
+  height: 16px;
+  width: 16px;
+  background-color: #EFC74B;
+}
+.presetpurple {
+  top: 5px;
+  left: 280px;
+  padding: 0px;
+  border: 1px solid #555555;
+  height: 16px;
+  width: 16px;
+  background-color: #8D6ADF;
+}
+.presetmagenta {
+  top: 5px;
+  left: 294px;
+  padding: 0px;
+  border: 1px solid #555555;
+  height: 16px;
+  width: 16px;
+  background-color: #CC669C;
+}
+.presetgrey {
+  top: 5px;
+  left: 308px;
+  padding: 0px;
+  border: 1px solid #555555;
+  height: 16px;
+  width: 16px;
+  background-color: #A7A7AF;
+}
+.presetdgrey {
+  top: 5px;
+  left: 322px;
+  padding: 0px;
+  border: 1px solid #555555;
+  height: 16px;
+  width: 16px;
+  background-color: #726F6F;
+}
+.presetwhite {
+  top: 5px;
+  left: 336px;
+  padding: 0px;
+  border: 1px solid #555555;
+  height: 16px;
+  width: 16px;
+  background-color: #DBDBDB;
+}
+.presetguiblack {
+  top: 5px;
+  left: 350px;
+  padding: 0px;
+  border: 1px solid #555555;
+  height: 16px;
+  width: 16px;
+  background-color: #000000;
+}
+.presetdefault {
+  top: 5px;
+  left: 364px;
+  padding: 0px;
+  border: 1px solid #555555;
+  height: 16px;
+  width: 16px;
+  background-color: #FFFFFF;
+  background-image: linear-gradient(to bottom, #FFFFFF, #ff0000);
+}
+.editbuttons {
+  z-index: 5;
+}
