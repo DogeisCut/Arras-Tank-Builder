@@ -309,12 +309,12 @@ function setColor(num)  {
 }
 
 function updateSize() {
-    size = document.getElementById("size").value;
+    size = Math.round(document.getElementById("size").value);
     if (typeof size !== "number")  {
-        size = parseInt(size);
-        document.getElementById("size").value = size
+        size = Math.round(parseInt(size));
+        document.getElementById("size").value = Math.round(size)
     } 
-    document.getElementById("sizeNumInput").value = size;
+    document.getElementById("sizeNumInput").value = Math.round(size);
 }
 
 function updateSizeNum() {
