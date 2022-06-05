@@ -21,6 +21,7 @@ canvas {
   left: 0;
   right: 0;
   outline: rgb(43, 43, 43) solid 3px;
+  cursor: crosshair;
 }
 
 textarea {
@@ -73,6 +74,29 @@ select {
   -ms-user-select: text;
 }
 
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 5px;
+  background: #b4b4b4; 
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px; 
+  background: white; 
+  cursor: pointer; 
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+input:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
 button, input {
   overflow: visible;
 }
@@ -90,6 +114,16 @@ button, input, optgroup, select, textarea {
 
 button {
   border-radius: 0;
+}
+
+.info {
+  margin: 0;
+  margin-top: -4px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  width: 12px;
+  height: 12px; 
 }
 
 /*Color Buttons*/
@@ -119,7 +153,7 @@ button {
   top: 5px;
   left: 84px;
   padding: 0px;
-  border: 1px solid #555555;
+  border: 2px solid black;
   height: 16px;
   width: 16px;
   background-color: #7ADBBC;
@@ -128,7 +162,7 @@ button {
   top: 5px;
   left: 98px;
   padding: 0px;
-  border: 1px solid #555555;
+  border: 2px solid black;
   height: 16px;
   width: 16px;
   background-color: #B9E87E;
@@ -137,7 +171,7 @@ button {
   top: 5px;
   left: 112px;
   padding: 0px;
-  border: 1px solid #555555;
+  border: 2px solid black;
   height: 16px;
   width: 16px;
   background-color: #E7896D;
@@ -146,7 +180,7 @@ button {
   top: 5px;
   left: 126px;
   padding: 0px;
-  border: 1px solid #555555;
+  border: 2px solid black;
   height: 16px;
   width: 16px;
   background-color: #FDF380;
@@ -155,7 +189,7 @@ button {
   top: 5px;
   left: 140px;
   padding: 0px;
-  border: 1px solid #555555;
+  border: 2px solid black;
   height: 16px;
   width: 16px;
   background-color: #B58EFD;
@@ -164,7 +198,7 @@ button {
   top: 5px;
   left: 154px;
   padding: 0px;
-  border: 1px solid #555555;
+  border: 2px solid black;
   height: 16px;
   width: 16px;
   background-color: #EF99C3;
@@ -173,7 +207,7 @@ button {
   top: 5px;
   left: 168px;
   padding: 0px;
-  border: 1px solid #555555;
+  border: 2px solid black;
   height: 16px;
   width: 16px;
   background-color: #E8EBF7;
@@ -182,7 +216,7 @@ button {
   top: 5px;
   left: 182px;
   padding: 0px;
-  border: 1px solid #555555;
+  border: 2px solid black;
   height: 16px;
   width: 16px;
   background-color: #AA9F9E;
@@ -191,7 +225,7 @@ button {
   top: 5px;
   left: 196px;
   padding: 0px;
-  border: 1px solid #555555;
+  border: 2px solid black;
   height: 16px;
   width: 16px;
   background-color: #FFFFFF;
@@ -200,7 +234,7 @@ button {
   top: 5px;
   left: 210px;
   padding: 0px;
-  border: 1px solid #555555;
+  border: 2px solid black;
   height: 16px;
   width: 16px;
   background-color: #484848;
@@ -209,7 +243,7 @@ button {
   top: 5px;
   left: 224px;
   padding: 0px;
-  border: 1px solid #555555;
+  border: 2px solid black;
   height: 16px;
   width: 16px;
   background-color: #3CA4CB;
@@ -218,7 +252,7 @@ button {
   top: 5px;
   left: 238px;
   padding: 0px;
-  border: 1px solid #555555;
+  border: 2px solid black;
   height: 16px;
   width: 16px;
   background-color: #8ABC3F;
@@ -227,7 +261,7 @@ button {
   top: 5px;
   left: 252px;
   padding: 0px;
-  border: 1px solid #555555;
+  border: 2px solid black;
   height: 16px;
   width: 16px;
   background-color: #E03E41;
@@ -236,7 +270,7 @@ button {
   top: 5px;
   left: 266px;
   padding: 0px;
-  border: 1px solid #555555;
+  border: 2px solid black;
   height: 16px;
   width: 16px;
   background-color: #EFC74B;
@@ -245,7 +279,7 @@ button {
   top: 5px;
   left: 280px;
   padding: 0px;
-  border: 1px solid #555555;
+  border: 2px solid black;
   height: 16px;
   width: 16px;
   background-color: #8D6ADF;
@@ -254,7 +288,7 @@ button {
   top: 5px;
   left: 294px;
   padding: 0px;
-  border: 1px solid #555555;
+  border: 2px solid black;
   height: 16px;
   width: 16px;
   background-color: #CC669C;
@@ -263,7 +297,7 @@ button {
   top: 5px;
   left: 308px;
   padding: 0px;
-  border: 1px solid #555555;
+  border: 2px solid black;
   height: 16px;
   width: 16px;
   background-color: #A7A7AF;
@@ -272,7 +306,7 @@ button {
   top: 5px;
   left: 322px;
   padding: 0px;
-  border: 1px solid #555555;
+  border: 2px solid black;
   height: 16px;
   width: 16px;
   background-color: #726F6F;
@@ -281,7 +315,7 @@ button {
   top: 5px;
   left: 336px;
   padding: 0px;
-  border: 1px solid #555555;
+  border: 2px solid black;
   height: 16px;
   width: 16px;
   background-color: #DBDBDB;
@@ -290,7 +324,7 @@ button {
   top: 5px;
   left: 350px;
   padding: 0px;
-  border: 1px solid #555555;
+  border: 2px solid black;
   height: 16px;
   width: 16px;
   background-color: #000000;
@@ -299,7 +333,7 @@ button {
   top: 5px;
   left: 364px;
   padding: 0px;
-  border: 1px solid #555555;
+  border: 2px solid black;
   height: 16px;
   width: 16px;
   background-color: #FFFFFF;

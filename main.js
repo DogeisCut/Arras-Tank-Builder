@@ -661,7 +661,7 @@ function drawFacingLine(){//draws a red line from the center to the right edge o
     ctx.stroke();
 }
 
-function drawGuns(){//DOESNT FUCKING WORK AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA, its innacurate how the game draws it, the size is wrong, draws from the wrong spot, and the angle is wrong
+function drawGuns(){//DOESNT freakin WORK AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA, its innacurate how the game draws it, the size is wrong, draws from the wrong spot, and the angle is wrong
     for (var i = 0; i < guns.length; i++) {
         pp = guns[i].POSITION[i] / ((guns[i].POSITION[2] === 1) ? 2 : 1)
         ctx.lineWidth = 8;
