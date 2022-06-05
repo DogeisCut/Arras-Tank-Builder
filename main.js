@@ -113,10 +113,6 @@ var body = {
     PUSHABILITY: 0.9,
     HETERO: 3,
 };
-var guns = [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-//POSITION:         [  18,     8,      1,      0,      0,      0,      0,   ],
-}, 
-];
 
 function drawPoly(context, centerX, centerY, radius, sides, angle = 0, fill = true) {
     angle += (sides % 2) ? 0 : Math.PI / sides;
@@ -662,16 +658,29 @@ function drawFacingLine(){//draws a red line from the center to the right edge o
     ctx.stroke();
 }
 
-function drawGuns(){//DOESNT freakin WORK AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA, its innacurate how the game draws it, the size is wrong, draws from the wrong spot, and the angle is wrong
+var guns = [  /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+    { POSITION:   [  18,     8,      1,      0,      0,      0,      0,   ] }, 
+];
+
+function drawGuns(){//DOESNT freakin WORK AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA, its innacurate how the game draws it, the size is wrong, draws from the wrong spot
     for (var i = 0; i < guns.length; i++) {
-        pp = guns[i].POSITION[i] / ((guns[i].POSITION[2] === 1) ? 2 : 1)
+        var [LENGTH, WIDTH, ASPECT, X, Y, ANGLE, DELAY] = guns[i].POSITION;
+        ANGLE = ANGLE * Math.PI / 180;
         ctx.lineWidth = 8;
-        ctx.lineCap = 'round';
+        ctx.lineCap = "round";
         ctx.lineJoin = "round";
-        var drawSize = size/3.6
-        gx = Math.cos(guns[i].POSITION[5] + 0) + (guns[i].POSITION[0] / 2 ) * Math.cos(guns[i].POSITION[5] + 0),
-        gy = Math.sin(guns[i].POSITION[5] + 0) + (guns[i].POSITION[0] / 2 ) * Math.sin(guns[i].POSITION[5] + 0);
-        drawTrapezoid(ctx, ((canvas.width / 2)+guns[i].POSITION[3])+gx*drawSize, (((canvas.width / 2)+guns[i].POSITION[4])+gy*drawSize)-100, drawSize * (guns[i].POSITION[0] / 2 - ((guns[i].POSITION[2] === 1) ? pp * 2 : 0)), drawSize * guns[i].POSITION[1] / 2, guns[i].POSITION[2], guns[i].POSITION[5])
+        var drawSize = size / 3.6;
+        var gx = LENGTH / 2 * Math.cos(ANGLE);
+        var gy = LENGTH / 2 * Math.sin(ANGLE);
+        drawTrapezoid(
+            ctx,
+            canvas.width / 2 + X + gx * drawSize, // x
+            canvas.width / 2 + Y + gy * drawSize - 100, // y
+            drawSize * LENGTH / 2, // length
+            drawSize * WIDTH / 2, // height
+            ASPECT,
+            ANGLE
+        );
     }
 }
         
@@ -683,7 +692,7 @@ function drawLoop(){
     drawFacingLine();
     ctx.fillStyle = barrelColor
     ctx.strokeStyle = getColorDark(barrelColor);
-    //drawGuns()
+    // drawGuns()
     if (currentColor != "default") {
     ctx.fillStyle = currentColor;
     ctx.strokeStyle = getColorDark(currentColor);
