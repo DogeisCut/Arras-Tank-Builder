@@ -659,11 +659,28 @@ function drawFacingLine(){  //draws a red line from the center to the right edge
     ctx.stroke();
 }
 
-var guns = [  /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-    { POSITION:   [  18,     8,      1,      0,      0,      0,      0,   ] }, 
+//var guns = [  /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+//    { POSITION:   [  18,     8,      1,      0,      0,      0,      0,   ] }, 
+//];
+
+
+//This is supposed to be the gunner, but something is causing it to draw incorrectly.
+var guns = [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+POSITION: [  12,    3.5,     1,      0,     7.25,    0,     0.5,  ], 
+    PROPERTIES: {
+    }, }, { 
+POSITION: [  12,    3.5,     1,      0,    -7.25,    0,     0.75, ], 
+    PROPERTIES: {
+    }, }, { 
+POSITION: [  16,    3.5,     1,      0,     3.75,    0,      0,   ], 
+    PROPERTIES: {
+    }, }, { 
+POSITION: [  16,    3.5,     1,      0,    -3.75,    0,     0.25, ], 
+    PROPERTIES: {
+    }, }, 
 ];
 
-function drawGuns(){ //Everything is fixed, just not sure if the units are the same as actual Arras units
+function drawGuns(){ //Everything is (ALMOST) fixed, just not sure if the units are the same as actual Arras units
     for (var i = 0; i < guns.length; i++) {
         var [LENGTH, WIDTH, ASPECT, X, Y, ANGLE, DELAY] = guns[i].POSITION;
         ANGLE = ANGLE * Math.PI / 180;
