@@ -666,16 +666,16 @@ function drawFacingLine(){  //draws a red line from the center to the right edge
 
 //This is supposed to be the gunner, but something is causing it to draw incorrectly.
 var guns = [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-POSITION: [  12,    3.5,     1,      0,     7.25,    0,     0.5,  ], 
+        POSITION: [  12,    3.5,     1,      0,     7.25,    0,     0.5,  ], 
     PROPERTIES: {
     }, }, { 
-POSITION: [  12,    3.5,     1,      0,    -7.25,    0,     0.75, ], 
+        POSITION: [  12,    3.5,     1,      0,    -7.25,    0,     0.75, ], 
     PROPERTIES: {
     }, }, { 
-POSITION: [  16,    3.5,     1,      0,     3.75,    0,      0,   ], 
+        POSITION: [  16,    3.5,     1,      0,     3.75,    0,      0,   ], 
     PROPERTIES: {
     }, }, { 
-POSITION: [  16,    3.5,     1,      0,    -3.75,    0,     0.25, ], 
+        POSITION: [  16,    3.5,     1,      0,    -3.75,    0,     0.25, ], 
     PROPERTIES: {
     }, }, 
 ];
