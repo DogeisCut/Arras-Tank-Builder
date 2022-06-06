@@ -663,7 +663,7 @@ var guns = [  /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
     { POSITION:   [  18,     8,      1,      0,      0,      0,      0,   ] }, 
 ];
 
-function drawGuns(){ //Is currently a bit broken, our code here draws guns relative to the body's rotation, but it should be relative to the guns themselves.
+function drawGuns(){ //Everything is fixed, just not sure if the units are the same as actual Arras units
     for (var i = 0; i < guns.length; i++) {
         var [LENGTH, WIDTH, ASPECT, X, Y, ANGLE, DELAY] = guns[i].POSITION;
         ANGLE = ANGLE * Math.PI / 180;
@@ -671,17 +671,15 @@ function drawGuns(){ //Is currently a bit broken, our code here draws guns relat
         ctx.lineCap = "round";
         ctx.lineJoin = "round";
         var drawSize = size / 3.6; //arbritrary value, need to figure out how the game actually determines what size to draw the gun
-        var gx = LENGTH / 2 * Math.cos(ANGLE);
-        var gy = LENGTH / 2 * Math.sin(ANGLE);
         drawTrapezoid(
             ctx,
-            canvas.width / 2 + X + gx * drawSize, // x
-            canvas.width / 2 + Y + gy * drawSize - 100, // y
+            canvas.width / 2 + ((Math.cos(ANGLE) * (LENGTH / 2 + X))+(Math.cos(ANGLE+-90) * (Y)))*drawSize, // x
+            canvas.height/ 2 + ((Math.sin(ANGLE) * (LENGTH / 2 + X))+(Math.sin(ANGLE+-90) * (Y)))*drawSize, // y
             drawSize * LENGTH / 2, // length
             drawSize * WIDTH / 2, // height
             ASPECT,
             ANGLE
-        );
+        ); 
     }
 }
         
@@ -693,7 +691,7 @@ function drawLoop(){ //Main loop that draws everything
     drawFacingLine();
     ctx.fillStyle = barrelColor
     ctx.strokeStyle = getColorDark(barrelColor);
-    //drawGuns()
+    drawGuns()
     if (currentColor != "default") {
     ctx.fillStyle = currentColor;
     ctx.strokeStyle = getColorDark(currentColor);
