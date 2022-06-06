@@ -88,7 +88,7 @@ var size = 12;
 var shape = 0;
 var currentColor = "default";
 var colorID = -1;
-const base = {
+const base = { //The base values for each body value
     ACCEL: 1.6,
     SPEED: 5.25,
     HEALTH: 20,
@@ -100,7 +100,7 @@ const base = {
     FOV: 1,
     DENSITY: 0.5,
 };
-var body = {
+var body = { //A varible thats used for the export function
     ACCELERATION: 1,
     SPEED: 1,
     HEALTH: 1, 
@@ -114,7 +114,7 @@ var body = {
     HETERO: 3,
 };
 
-function drawPoly(context, centerX, centerY, radius, sides, angle = 0, fill = true) {
+function drawPoly(context, centerX, centerY, radius, sides, angle = 0, fill = true) { //the function that Arras.io uses to draw the tank
     angle += (sides % 2) ? 0 : Math.PI / sides;
     // Start drawing
     context.beginPath();
@@ -173,7 +173,7 @@ function drawPoly(context, centerX, centerY, radius, sides, angle = 0, fill = tr
     context.lineJoin = 'round';
 }
 
-function drawTrapezoid(context, x, y, length, height, aspect, angle) {
+function drawTrapezoid(context, x, y, length, height, aspect, angle) { //The function that Arras.io uses to draw guns
     let h = [];
     h = (aspect > 0) ? [height * aspect, height] : [height, -height * aspect];
     let r = [
@@ -194,7 +194,7 @@ function drawTrapezoid(context, x, y, length, height, aspect, angle) {
     context.fill();
 }
 
-function mixColors(color1, color2, amount) {
+function mixColors(color1, color2, amount) { // The mix color function, input 1 and 2 are swapped. 
     let c1 = color1.match(/^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i);
     let c2 = color2.match(/^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i);
     let c = [
@@ -205,18 +205,18 @@ function mixColors(color1, color2, amount) {
     return '#' + c[0].toString(16) + c[1].toString(16) + c[2].toString(16);
 }
 
-function getColorDark(givenColor) {
+function getColorDark(givenColor) { // Gets the darker color of a given color, its exactly how the game does it but input 1 and 2 are swapped
     return mixColors(color.normal.black, givenColor, 0.65);
 }
 
-function updateSides() {
+function updateSides() { // Update the number of sides of the tank from the html input
     shape = document.getElementById("sides").value;
     document.getElementById("sides").value = shape;
     var sidesValue = document.getElementById("sidesValue");
     sidesValue.innerHTML = shape;
 }
 
-function setColor(num)  {
+function setColor(num)  { //A function thats only used for the color buttons.
     switch (num) {
         case 1:
             currentColor = color.normal.teal;
@@ -305,7 +305,7 @@ function setColor(num)  {
     }
 }
 
-function updateSize() {
+function updateSize() { //Update the number input when the slider is changed
     size = Math.round(document.getElementById("size").value);
     if (typeof size !== "number")  {
         size = Math.round(parseInt(size));
@@ -314,7 +314,7 @@ function updateSize() {
     document.getElementById("sizeNumInput").value = Math.round(size);
 }
 
-function updateSizeNum() {
+function updateSizeNum() { //Update the slider when the number input is changed
     size = document.getElementById("sizeNumInput").value
     if (typeof size !== "number")  {
         size = parseInt(size);
@@ -338,7 +338,7 @@ function updateSizeNum() {
     },
 */
 
-function exportTank() {
+function exportTank() { //Uses our varibles and sets "it" to the export code
     var exportName = document.getElementById("exportName").value;
     var parent = document.getElementById("parent").value;
     var label = document.getElementById("label").value;
@@ -513,7 +513,8 @@ function exportTank() {
     },
 */
 
-//body function
+//body functions
+//Just updates our varibles for the export function from the html
 function updateAcceleration() {
     if (document.getElementById("accelerationenable").checked) {
         document.getElementById("accelerationbasemulti").disabled = false;
@@ -649,7 +650,7 @@ function updateHetero() {
 }
 
 
-function drawFacingLine(){//draws a red line from the center to the right edge of the screen
+function drawFacingLine(){  //draws a red line from the center to the right edge of the screen
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.strokeStyle = "red";
@@ -662,14 +663,14 @@ var guns = [  /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
     { POSITION:   [  18,     8,      1,      0,      0,      0,      0,   ] }, 
 ];
 
-function drawGuns(){//DOESNT freakin WORK AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA, its innacurate how the game draws it, the size is wrong, draws from the wrong spot
+function drawGuns(){ //Is currently a bit broken, our code here draws guns relative to the body's rotation, but it should be relative to the guns themselves.
     for (var i = 0; i < guns.length; i++) {
         var [LENGTH, WIDTH, ASPECT, X, Y, ANGLE, DELAY] = guns[i].POSITION;
         ANGLE = ANGLE * Math.PI / 180;
         ctx.lineWidth = 8;
         ctx.lineCap = "round";
         ctx.lineJoin = "round";
-        var drawSize = size / 3.6;
+        var drawSize = size / 3.6; //arbritrary value, need to figure out how the game actually determines what size to draw the gun
         var gx = LENGTH / 2 * Math.cos(ANGLE);
         var gy = LENGTH / 2 * Math.sin(ANGLE);
         drawTrapezoid(
@@ -685,14 +686,14 @@ function drawGuns(){//DOESNT freakin WORK AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 }
         
 
-function drawLoop(){
+function drawLoop(){ //Main loop that draws everything
     //fullscreenCanvas()
     ctx.fillStyle = color.normal.vlgrey
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     drawFacingLine();
     ctx.fillStyle = barrelColor
     ctx.strokeStyle = getColorDark(barrelColor);
-    // drawGuns()
+    //drawGuns()
     if (currentColor != "default") {
     ctx.fillStyle = currentColor;
     ctx.strokeStyle = getColorDark(currentColor);
@@ -702,6 +703,7 @@ function drawLoop(){
     }
     ctx.lineWidth = 8;
     drawPoly(ctx, canvas.width / 2, canvas.height / 2, size*2.8, Math.round(shape), 0, true);
+    //the size of the tank is an arbitrary value, need to figure out how the game actually determines what size to draw the tank
     document.getElementById("exportCode").value = exportTank();
     requestAnimationFrame(drawLoop);
 }
