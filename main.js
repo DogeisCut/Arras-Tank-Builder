@@ -422,7 +422,7 @@ function exportTank() { //Uses our varibles and sets "it" to the export code
         it += "   MAX_CHILDREN: " + maxChildren + ",\n";
     }
     if (damageEffects != false||parent != "genericTank") {
-        it += "   DAMAGE_EFFECT: " + damageEffects + ",\n";
+        it += "   DAMAGE_EFFECTS: " + damageEffects + ",\n";
     }
     if (colorID != -1) {
         it += "   COLOR: " + colorID + ",\n";
@@ -713,8 +713,17 @@ function drawFacingLine(){  //draws a red line from the center to the right edge
 }
         
 
+function addRandomGuns(){
+    if (mouseDown) {
+        guns.push({ /***            LENGTH          WIDTH                   ASPECT                      X                          Y                       ANGLE           DELAY */
+            POSITION: [      Math.random()*24,     Math.random()*12,    Math.random()*2,      12*Math.random()-0.5*2,     12*Math.random()-0.5*2,    360*Math.random(),     0.5,  ],  
+        })
+    }
+}
+
 function drawLoop(){ //Main loop that draws everything
     //fullscreenCanvas()
+    //addRandomGuns()
     ctx.fillStyle = color.normal.vlgrey
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     drawFacingLine();
