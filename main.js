@@ -338,6 +338,48 @@ function updateSizeNum() { //Update the slider when the number input is changed
     },
 */
 
+
+//Basic
+//var guns = [  /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+//    { POSITION:   [  18,     8,      1,      0,      0,      0,      0,   ] }, 
+//];
+
+//Gunner
+var guns = [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+        POSITION: [  12,    3.5,     1,      0,     7.25,    0,     0.5,  ], 
+    PROPERTIES: {
+    }, }, { 
+        POSITION: [  12,    3.5,     1,      0,    -7.25,    0,     0.75, ], 
+    PROPERTIES: {
+    }, }, { 
+        POSITION: [  16,    3.5,     1,      0,     3.75,    0,      0,   ], 
+    PROPERTIES: {
+    }, }, { 
+        POSITION: [  16,    3.5,     1,      0,    -3.75,    0,     0.25, ], 
+    PROPERTIES: {
+    }, }, 
+];
+
+function drawGuns(){ //Everything is fixed, just not sure if the units are the same as actual Arras units
+    for (var i = 0; i < guns.length; i++) {
+        var [LENGTH, WIDTH, ASPECT, X, Y, ANGLE, DELAY] = guns[i].POSITION;
+        ANGLE = ANGLE * Math.PI / 180;
+        ctx.lineWidth = 8;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        var drawSize = size / 3.6; //arbritrary value, need to figure out how the game actually determines what size to draw the gun
+        drawTrapezoid(
+            ctx,
+            canvas.width / 2 + ((Math.cos(ANGLE) * (LENGTH / 2 + X))+(Math.cos(ANGLE+-1.5708) * (Y)))*drawSize, // x
+            canvas.height/ 2 + ((Math.sin(ANGLE) * (LENGTH / 2 + X))+(Math.sin(ANGLE+-1.5708) * (Y)))*drawSize, // y
+            drawSize * LENGTH / 2, // length
+            drawSize * WIDTH / 2, // height
+            ASPECT,
+            ANGLE
+        ); 
+    }
+}
+
 function exportTank() { //Uses our varibles and sets "it" to the export code
     var exportName = document.getElementById("exportName").value;
     var parent = document.getElementById("parent").value;
@@ -494,6 +536,17 @@ function exportTank() { //Uses our varibles and sets "it" to the export code
             }
         it += "   },\n"
     }
+    if (guns.length > 0) {
+        it += "   GUNS: [ ";
+        for (var i = 0; i < guns.length; i++) {
+            var [LENGTH, WIDTH, ASPECT, X, Y, ANGLE, DELAY] = guns[i].POSITION;
+            it += "{\n         POSITION: [ " + LENGTH + ", " + WIDTH + ", " + ASPECT + ", " + X + ", " + Y + ", " + ANGLE + ", " + DELAY + ", ],\n";
+            it += "      }, ";
+        }
+        
+        it += "\n   ],\n";
+    }
+
     it += "};\n";
     return it;
 }
@@ -657,47 +710,6 @@ function drawFacingLine(){  //draws a red line from the center to the right edge
     ctx.moveTo(canvas.width/2, canvas.height/2);
     ctx.lineTo(canvas.width, canvas.height/2);
     ctx.stroke();
-}
-
-//var guns = [  /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-//    { POSITION:   [  18,     8,      1,      0,      0,      0,      0,   ] }, 
-//];
-
-
-//This is supposed to be the gunner, but something is causing it to draw incorrectly.
-var guns = [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-        POSITION: [  12,    3.5,     1,      0,     7.25,    0,     0.5,  ], 
-    PROPERTIES: {
-    }, }, { 
-        POSITION: [  12,    3.5,     1,      0,    -7.25,    0,     0.75, ], 
-    PROPERTIES: {
-    }, }, { 
-        POSITION: [  16,    3.5,     1,      0,     3.75,    0,      0,   ], 
-    PROPERTIES: {
-    }, }, { 
-        POSITION: [  16,    3.5,     1,      0,    -3.75,    0,     0.25, ], 
-    PROPERTIES: {
-    }, }, 
-];
-
-function drawGuns(){ //Everything is (ALMOST) fixed, just not sure if the units are the same as actual Arras units
-    for (var i = 0; i < guns.length; i++) {
-        var [LENGTH, WIDTH, ASPECT, X, Y, ANGLE, DELAY] = guns[i].POSITION;
-        ANGLE = ANGLE * Math.PI / 180;
-        ctx.lineWidth = 8;
-        ctx.lineCap = "round";
-        ctx.lineJoin = "round";
-        var drawSize = size / 3.6; //arbritrary value, need to figure out how the game actually determines what size to draw the gun
-        drawTrapezoid(
-            ctx,
-            canvas.width / 2 + ((Math.cos(ANGLE) * (LENGTH / 2 + X))+(Math.cos(ANGLE+-1.5708) * (Y)))*drawSize, // x
-            canvas.height/ 2 + ((Math.sin(ANGLE) * (LENGTH / 2 + X))+(Math.sin(ANGLE+-1.5708) * (Y)))*drawSize, // y
-            drawSize * LENGTH / 2, // length
-            drawSize * WIDTH / 2, // height
-            ASPECT,
-            ANGLE
-        ); 
-    }
 }
         
 
