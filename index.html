@@ -250,6 +250,9 @@
     <!--LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY-->
     <div class="guns panel">
       <h1>Guns:</h1>
+      <p>Mirror Guns: <input type="checkbox" id="mirrorGuns" onclick="updateMirrorGuns()"> 
+        <img src="infoblurb.png" class="info" title ="Places a second barrel with a flipped angle and y offset"></p>
+      
       <p>Length: <input type="range" min="0" max="50" value="18" class="slider" id="gunLength" oninput="updateGunLengthSlider(); updateGunSettings();"> <input type="number" min="0" value="18" id="gunLengthNum" oninput="updateGunLengthNum(); updateGunSettings();">
         <img src="infoblurb.png" class="info" title ="Default: 18
         The length of the gun">

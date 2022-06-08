@@ -819,21 +819,26 @@ function barrelEditor() { //place guns on mouse down
     if (mouseX < canvas.width && mouseY < canvas.height && mouseX > 0 && mouseY > 0) {  
         var GNPLCgunAngle = Math.atan2(mouseY - canvas.height/2, mouseX - canvas.width/2);
         var GNPLCgunAngle = GNPLCgunAngle * (180 / Math.PI);
+        var mirroredGuns = document.getElementById("mirrorGuns").checked;
         //snap angle to 15 degrees if holding shift
         if (keys["Shift"]) {
-            GNPLCgunAngle = Math.round(GNPLCgunAngle / 15) * 15;
+            GNPLCgunAngle = Math.round(GNPLCgunAngle / 7.5) * 7.5;
         }
         ctx.fillStyle = getColorTransparent("#ff0000")
-        ctx.strokeStyle = "#00000000";
+        ctx.strokeStyle = "#FF0000";
         drawGhostGun(  gunLength,     gunWidth,      gunAspect,    gunX,  gunY,  GNPLCgunAngle,      gunDelay,)
+        if(mirroredGuns&&GNPLCgunAngle!=0&&GNPLCgunAngle!=180){drawGhostGun(  gunLength,     gunWidth,      gunAspect,    gunX,  -gunY,  -GNPLCgunAngle,      gunDelay,)}
         if (isMouseJustDown()) {
         guns.push(/***     LENGTH              WIDTH     ASPECT            X      Y        ANGLE             DELAY */
             { POSITION:   [  gunLength,     gunWidth,      gunAspect,    gunX,  gunY,  GNPLCgunAngle,      gunDelay,   ] }, 
         )
+        if(mirroredGuns&&GNPLCgunAngle!=0&&GNPLCgunAngle!=180){guns.push(/***     LENGTH              WIDTH     ASPECT            X      Y        ANGLE             DELAY */
+            { POSITION:   [  gunLength,     gunWidth,      gunAspect,    gunX,  -gunY,  -GNPLCgunAngle,      gunDelay,   ] }, 
+        )}
         }
     } else {
-        ctx.fillStyle = "#FF000044";
-        ctx.strokeStyle = "#00000000";
+        ctx.fillStyle = "#0000FF77";
+        ctx.strokeStyle = "#0000FF";
         drawGhostGun(  gunLength,     gunWidth,      gunAspect,    gunX,  gunY,  0,      gunDelay,)
     }
 }
