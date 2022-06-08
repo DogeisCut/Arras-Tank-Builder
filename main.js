@@ -363,19 +363,23 @@ function updateSizeNum() { //Update the slider when the number input is changed
 //];
 
 //Gunner
-var guns = [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-        POSITION: [  12,    3.5,     1,      0,     7.25,    0,     0.5,  ], 
-    PROPERTIES: {
-    }, }, { 
-        POSITION: [  12,    3.5,     1,      0,    -7.25,    0,     0.75, ], 
-    PROPERTIES: {
-    }, }, { 
-        POSITION: [  16,    3.5,     1,      0,     3.75,    0,      0,   ], 
-    PROPERTIES: {
-    }, }, { 
-        POSITION: [  16,    3.5,     1,      0,    -3.75,    0,     0.25, ], 
-    PROPERTIES: {
-    }, }, 
+// var guns = [ { /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+//         POSITION: [  12,    3.5,     1,      0,     7.25,    0,     0.5,  ], 
+//     PROPERTIES: {
+//     }, }, { 
+//         POSITION: [  12,    3.5,     1,      0,    -7.25,    0,     0.75, ], 
+//     PROPERTIES: {
+//     }, }, { 
+//         POSITION: [  16,    3.5,     1,      0,     3.75,    0,      0,   ], 
+//     PROPERTIES: {
+//     }, }, { 
+//         POSITION: [  16,    3.5,     1,      0,    -3.75,    0,     0.25, ], 
+//     PROPERTIES: {
+//     }, }, 
+// ];
+
+//Empty
+var guns = [
 ];
 
 function drawGuns(){ //Everything is fixed, just not sure if the units are the same as actual Arras units
@@ -403,7 +407,7 @@ function drawGhostGun(length, width, aspect, x, y, angle, delay) { //draws a tra
     ctx.lineWidth = 8;
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
-    ctx.fillStyle = getColorTransparent(barrelColor)
+    ctx.fillStyle = getColorTransparent("#ff0000")
     ctx.strokeStyle = "#00000000";
     var drawSize = size / 3.6; //arbritrary value, need to figure out how the game actually determines what size to draw the gun
     drawTrapezoid(
@@ -799,10 +803,10 @@ function drawLoop(){ //Main loop that draws everything
     ctx.fillStyle = color.normal.vlgrey
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     drawFacingLine();
-    barrelEditor()
     ctx.fillStyle = barrelColor
     ctx.strokeStyle = getColorDark(barrelColor);
     drawGuns()
+    barrelEditor()
     if (currentColor != "default") {
     ctx.fillStyle = currentColor;
     ctx.strokeStyle = getColorDark(currentColor);

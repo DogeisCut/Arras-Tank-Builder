@@ -8,11 +8,18 @@ html, body {
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, -1px -1px black, -1px 1px black, 1px 1px black, 1px -1px black;
     border: none;
     margin: 5px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none; 
+     -khtml-user-select: none; 
+       -moz-user-select: none; 
+        -ms-user-select: none; 
+            user-select: none; 
 }
 
 .panel {
   background-color: rgba(0, 0, 0, 0.308);
   border-radius: 15px;
+  padding: 5px;
   /*text-align: center;*/
 }
 
@@ -33,7 +40,7 @@ html, body {
   top: 50%;
   left: 50%;
   margin-top: 300px;
-  margin-left: -404px;
+  margin-left: -408px;
 }
 
 canvas {

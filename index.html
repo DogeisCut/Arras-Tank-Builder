@@ -250,11 +250,11 @@
     <!--LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY-->
     <div class="guns panel">
       <h1>Guns:</h1>
-      <p>Length: <input type="number" min="0" value="18" id="gunLength">
+      <p>Length: <input type="range" min="0" max="30" value="0" class="slider" id="gunX"> <input type="number" min="0" value="18" id="gunLength">
         <img src="infoblurb.png" class="info" title ="Default: 18
         The length of the gun">
       </p>
-      <p>Width: <input type="number" min="0" value="8" id="gunWidth">
+      <p>Width: <input type="range" min="0" max="10" value="0" class="slider" id="gunX"> <input type="number" min="0" value="8" id="gunWidth">
         <img src="infoblurb.png" class="info" title ="Default: 8
         The width of the gun">
       </p>
@@ -262,11 +262,11 @@
         <img src="infoblurb.png" class="info" title ="Default: 1
         Controls how much the gun 'bends', 1 is nothing, anything past 1 will enlarge the tip of the gun, and decimals below one will shrink the tip">
       </p>
-      <p>X: <input type="number" value="0" id="gunXNum">
+      <p>X Offset: <input type="range" min="-50" max="50" value="0" class="slider" id="gunX"> <input type="number" value="0" id="gunXNum">
         <img src="infoblurb.png" class="info" title ="Default: 0
         The x position of the gun relative to its rotation">
       </p>
-      <p>Y: <input type="number" value="0" id="gunYNum">
+      <p>Y Offset: <input type="range" min="-50" max="50" value="0" class="slider" id="gunY"> <input type="number" value="0" id="gunYNum">
         <img src="infoblurb.png" class="info" title ="Default: 0
         The y position of the gun relative to its rotation">
       </p>
