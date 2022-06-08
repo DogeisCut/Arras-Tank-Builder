@@ -297,6 +297,16 @@
       <button class="button" onclick="duplicateGun()">Duplicate</button>
       <button class="button" onclick="cancelGunPopup()">Cancel</button>
     </div>
+
+    <div class="displaysettings panel" hidden="true">
+      <h1>Display Settings:</h1>
+      <p>Show gun ghost: <input type="checkbox" id="showGunGhost" onclick="updateShowGunGhost()"> <img src="infoblurb.png" class="info" title ="Default: true
+      Shows a ghost of the gun when you are editing it"></p>
+      <p>Draw tank body: <input type="checkbox" id="drawTankBody" onclick="updateDrawTankBody()"> <img src="infoblurb.png" class="info" title ="Default: true
+      Draws the tank body"></p>
+      <p>Draw red line: <input type="checkbox" id="drawRedLine" onclick="updateDrawRedLine()"> <img src="infoblurb.png" class="info" title ="Default: true
+      Draws a red line thats meant to show you which way the tank is facing"></p>
+    </div>
     
     <script src="main.js"></script>
 </html>

@@ -897,11 +897,14 @@ function gunSelection(){//Adds an option to the "guns" select box for every gun 
 
     for (var i = 0; i < guns.length; i++) {
         var option = document.createElement("option");
-        option.text = "Gun " + (i + 1);
+        option.text = "Gun " + (i + 1) + " (Unnamed)";
         option.value = i;
         gunsSelect.add(option);
     }
 }
+
+//ideally it would be nice to be able to select a gun by clicking on it, but I'm not sure how to do that
+//for now i want to have the dropdown highlight the gun just by hovering over the option instead of when the popup is open
 
 var selectedGun = -1;
 function updateGunsDropdown() {
