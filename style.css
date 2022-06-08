@@ -9,6 +9,33 @@ html, body {
     border: none;
     margin: 5px;
 }
+
+.panel {
+  background-color: rgba(0, 0, 0, 0.308);
+  border-radius: 15px;
+  /*text-align: center;*/
+}
+
+.main {
+  justify-content: left;
+  align-items: left;
+	float: left;
+}
+.guns {
+  justify-content: right;
+  align-items: right;
+	float: right;
+}
+.export {
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: 300px;
+  margin-left: -404px;
+}
+
 canvas {
   padding: 0;
   margin: auto;
@@ -28,7 +55,7 @@ textarea {
   background-color: #f8f8f8;
   color: black;
   resize: none;
-  width: 400px;
+  width: 800px;
   height: 300px;
   line-height: 14px;
   font: 12px/16px ubuntu, sans-serif;

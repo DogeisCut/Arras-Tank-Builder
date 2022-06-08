@@ -44,6 +44,7 @@ var mouseDownY = 0;
 var mouseUpX = false;
 var mouseUpY = false;
 var mouseDown = false;
+var mouseJustDown = false;
 addEventListener("keydown", function (e) {
     keys[e.key] = true;
 }
@@ -53,8 +54,8 @@ addEventListener("keyup", function (e) {
 }
 );
 addEventListener("mousemove", function (e) {
-    mouseX = e.clientX-canvas.offsetLeft;
-    mouseY = e.clientY-canvas.offsetTop;
+    mouseX = e.clientX-canvas.offsetLeft+window.pageXOffset;
+    mouseY = e.clientY-canvas.offsetTop+window.pageYOffset;
 }
 );
 addEventListener("mousedown", function (e) {
@@ -75,6 +76,19 @@ addEventListener("mouseup", function (e) {
     console.log("mouseUpY: " + mouseUpY);
 }
 );
+t = 0
+function isMouseJustDown() {
+    if (mouseDown) {
+        t++
+    } else {
+        t=0
+    }
+    if (t==1) {
+        return true
+    }
+    return false
+}
+
 
 //Arras.io tank builder
 //Provides a visual way to make tanks for arras.io private servers
@@ -207,6 +221,10 @@ function mixColors(color1, color2, amount) { // The mix color function, input 1 
 
 function getColorDark(givenColor) { // Gets the darker color of a given color, its exactly how the game does it but input 1 and 2 are swapped
     return mixColors(color.normal.black, givenColor, 0.65);
+}
+
+function getColorTransparent(givenColor) {
+    return givenColor + '77';
 }
 
 function updateSides() { // Update the number of sides of the tank from the html input
@@ -379,6 +397,26 @@ function drawGuns(){ //Everything is fixed, just not sure if the units are the s
         ); 
     }
 }
+
+function drawGhostGun(length, width, aspect, x, y, angle, delay) { //draws a transparent version of the gun
+    angle = angle * Math.PI / 180;
+    ctx.lineWidth = 8;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    ctx.fillStyle = getColorTransparent(barrelColor)
+    ctx.strokeStyle = "#00000000";
+    var drawSize = size / 3.6; //arbritrary value, need to figure out how the game actually determines what size to draw the gun
+    drawTrapezoid(
+        ctx,
+        canvas.width / 2 + ((Math.cos(angle) * (length / 2 + x))+(Math.cos(angle+-1.5708) * (y)))*drawSize, // x
+        canvas.height/ 2 + ((Math.sin(angle) * (length / 2 + x))+(Math.sin(angle+-1.5708) * (y)))*drawSize, // y
+        drawSize * length / 2, // length
+        drawSize * width / 2, // height
+        aspect,
+        angle,
+    );
+}
+
 
 function exportTank() { //Uses our varibles and sets "it" to the export code
     var exportName = document.getElementById("exportName").value;
@@ -721,12 +759,47 @@ function addRandomGuns(){
     }
 }
 
+function closestCirclePoint(x, y, cx, cy, r) { //finds the closest point on a circle to a point
+    var dx = x - cx;
+    var dy = y - cy;
+    var dist = Math.sqrt(dx * dx + dy * dy);
+    var angle = Math.acos(dx / dist);
+    if (dy < 0) {
+        angle = -angle;
+    }
+    return [cx + r * Math.cos(angle), cy + r * Math.sin(angle)];
+}
+
+function barrelEditor() { //place guns on mouse down
+    //check if the mouse is actually inside the canvas
+    if (mouseX < canvas.width && mouseY < canvas.height && mouseX > 0 && mouseY > 0) {  
+        var GNPLCgunAngle = Math.atan2(mouseY - canvas.height/2, mouseX - canvas.width/2);
+        var GNPLCdrawSize = size / 3.6; //arbritrary value, need to figure out how the game actually determines what size to draw the gun
+        var GNPLCclosestPointX = closestCirclePoint(mouseX, mouseY, canvas.width / 2, canvas.height / 2, size*2.8)[0];
+        var GNPLCclosestPointY = closestCirclePoint(mouseX, mouseY, canvas.width / 2, canvas.height / 2, size*2.8)[1];
+        var GNPLCplaceX   = 0//(closestPointX - canvas.width/2) / drawSize
+        var GNPLCplaceY   = 0//-(closestPointY - canvas.height/2) / drawSize
+        var GNPLCgunAngle = GNPLCgunAngle * (180 / Math.PI);
+        //snap angle to 15 degrees if holding shift
+        if (keys["Shift"]) {
+            GNPLCgunAngle = Math.round(GNPLCgunAngle / 15) * 15;
+        }
+        drawGhostGun(  18,     8,      1,    GNPLCplaceX,  GNPLCplaceY,  GNPLCgunAngle,      0,   )
+        if (isMouseJustDown()) {
+        guns.push(/***     LENGTH  WIDTH   ASPECT       X             Y            ANGLE         DELAY */
+            { POSITION:   [  18,     8,      1,    GNPLCplaceX,  GNPLCplaceY,  GNPLCgunAngle,      0,   ] }, 
+        )
+        }
+    }
+}
+
 function drawLoop(){ //Main loop that draws everything
     //fullscreenCanvas()
     //addRandomGuns()
     ctx.fillStyle = color.normal.vlgrey
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     drawFacingLine();
+    barrelEditor()
     ctx.fillStyle = barrelColor
     ctx.strokeStyle = getColorDark(barrelColor);
     drawGuns()
