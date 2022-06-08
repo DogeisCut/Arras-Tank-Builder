@@ -23,6 +23,21 @@ html, body {
   /*text-align: center;*/
 }
 
+.gunpopup {
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  position: fixed;
+  top: 400px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: fit-content;
+  height: fit-content;
+  text-align: center;
+  z-index: 9999;
+}
+
 .main {
   justify-content: left;
   align-items: left;

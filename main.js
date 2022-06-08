@@ -45,20 +45,33 @@ var mouseUpX = false;
 var mouseUpY = false;
 var mouseDown = false;
 var mouseJustDown = false;
+var ignoreInput = false;
 addEventListener("keydown", function (e) {
+    if (ignoreInput) {
+        return;
+    }
     keys[e.key] = true;
 }
 );
 addEventListener("keyup", function (e) {
+    if (ignoreInput) {
+        return;
+    }
     keys[e.key] = false;
 }
 );
 addEventListener("mousemove", function (e) {
+    if (ignoreInput) {
+        return;
+    }
     mouseX = e.clientX-canvas.offsetLeft+window.pageXOffset;
     mouseY = e.clientY-canvas.offsetTop+window.pageYOffset;
 }
 );
 addEventListener("mousedown", function (e) {
+    if (ignoreInput) {
+        return;
+    }
     mouseDown = true;
     mouseDownX = mouseX;
     mouseDownY = mouseY;
@@ -68,6 +81,9 @@ addEventListener("mousedown", function (e) {
 }
 );
 addEventListener("mouseup", function (e) {
+    if (ignoreInput) {
+        return;
+    }
     mouseDown = false;
     mouseUpX = mouseX;
     mouseUpY = mouseY;
@@ -814,6 +830,8 @@ function updateGunSettings() {
     gunDelay = parseFloat(document.getElementById("gunDelay").value);
 }
 
+var highlightGunID = -1;
+
 function barrelEditor() { //place guns on mouse down
     //check if the mouse is actually inside the canvas
     if (mouseX < canvas.width && mouseY < canvas.height && mouseX > 0 && mouseY > 0) {  
@@ -826,8 +844,10 @@ function barrelEditor() { //place guns on mouse down
         }
         ctx.fillStyle = getColorTransparent("#ff0000")
         ctx.strokeStyle = "#FF0000";
+        if (highlightGunID == -1) {
         drawGhostGun(  gunLength,     gunWidth,      gunAspect,    gunX,  gunY,  GNPLCgunAngle,      gunDelay,)
         if(mirroredGuns&&GNPLCgunAngle!=0&&GNPLCgunAngle!=180){drawGhostGun(  gunLength,     gunWidth,      gunAspect,    gunX,  -gunY,  -GNPLCgunAngle,      gunDelay,)}
+        }
         if (isMouseJustDown()) {
         guns.push(/***     LENGTH              WIDTH     ASPECT            X      Y        ANGLE             DELAY */
             { POSITION:   [  gunLength,     gunWidth,      gunAspect,    gunX,  gunY,  GNPLCgunAngle,      gunDelay,   ] }, 
@@ -835,12 +855,80 @@ function barrelEditor() { //place guns on mouse down
         if(mirroredGuns&&GNPLCgunAngle!=0&&GNPLCgunAngle!=180){guns.push(/***     LENGTH              WIDTH     ASPECT            X      Y        ANGLE             DELAY */
             { POSITION:   [  gunLength,     gunWidth,      gunAspect,    gunX,  -gunY,  -GNPLCgunAngle,      gunDelay,   ] }, 
         )}
+        gunSelection()
         }
     } else {
         ctx.fillStyle = "#0000FF77";
         ctx.strokeStyle = "#0000FF";
+        if (highlightGunID == -1) {
         drawGhostGun(  gunLength,     gunWidth,      gunAspect,    gunX,  gunY,  0,      gunDelay,)
+        }
     }
+    if (highlightGunID != -1) {
+        ctx.fillStyle = "#00FF0077";
+        ctx.strokeStyle = "#00FF00";
+        var [highlightLength, highlightWidth, highlightAspect, highlightX, highlightY, highlightAngle, highlightDelay] = guns[highlightGunID].POSITION;
+        drawGhostGun(  highlightLength,     highlightWidth,      highlightAspect,    highlightX,  highlightY,  highlightAngle,   highlightDelay,)
+    }
+}
+
+function gunSelection(){//Adds an option to the "guns" select box for every gun in the guns array
+    var gunsSelect = document.getElementById("guns");
+    gunsSelect.disabled = false;
+
+    while (gunsSelect.options.length > 0) {
+        gunsSelect.remove(0);
+    }
+
+    var selection = document.createElement("option");
+    selection.value = "selection";
+    selection.hidden = true;
+    selection.disabled = true;
+    selection.selected = true;
+    selection.innerHTML = "Select A Gun";
+    gunsSelect.appendChild(selection);
+
+    var noGuns = document.createElement("option");
+    noGuns.value = "YOU SHOULDNT SEE THIS BALLS BALLS BALLS";
+    noGuns.hidden = true;
+    noGuns.disabled = true;
+    noGuns.innerHTML = "No Guns";
+    gunsSelect.appendChild(noGuns);
+
+    for (var i = 0; i < guns.length; i++) {
+        var option = document.createElement("option");
+        option.text = "Gun " + (i + 1);
+        option.value = i;
+        gunsSelect.add(option);
+    }
+}
+
+var selectedGun = -1;
+function updateGunsDropdown() {
+    var gunsSelect = document.getElementById("guns");
+    selectedGun = gunsSelect.selectedIndex;
+    //change the dropdown back to select a gun, or if there are no guns, change it back to no guns
+    if (guns.length == 0) {
+        gunsSelect.selectedIndex = 1;
+    } else {
+        gunsSelect.selectedIndex = 0;
+        document.getElementById("gunPopup").style.display = "block";
+        ignoreInput = true;
+        highlightGunID = selectedGun;
+    }
+}
+
+function cancelGunPopup() {
+    document.getElementById("gunPopup").style.display = "none";
+    ignoreInput = false;
+    highlightGunID = -1;
+}
+
+function deleteGun() {
+    guns.splice(selectedGun, 1);
+    gunSelection();
+    updateGunsDropdown();
+    cancelGunPopup() 
 }
 
 function drawLoop(){ //Main loop that draws everything

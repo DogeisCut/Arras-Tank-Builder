@@ -120,8 +120,9 @@
         I don't know what this does, good luck! :)">
 
       <!--create a dropdown entry for each gun-->
-      <p>Guns: <select id="guns" onchange="updateGuns()" oninput="updateGuns()" disabled = "true">
+      <p>Guns: <select id="guns" onchange="updateGunsDropdown()" oninput="updateGunsDropdown()" disabled = "true">
         <option value="YOU SHOULDNT SEE THIS BALLS BALLS BALLS" hidden disabled selected>No Guns</option>
+        <option value="selection" hidden disabled>Select A Gun</option>
       </select>
         <img src="infoblurb.png" class="info" title ="Add guns by clicking, a menu will open that lets you edit its properties! ">
       </p>
@@ -287,6 +288,14 @@
     <div class="export panel">
       <h2 style="text-align:center;">Export Code: <img src="infoblurb.png" class="info" title ="The stuff you copy paste into your private server's definitions.js file!"></h2>
       <textarea style="display:block; margin-left:auto; margin-right:auto; " id="exportCode" rows="10" cols="50" readonly="readonly"></textarea>    
+    </div>
+
+    <div class="gunpopup panel" id="gunPopup" hidden="true">
+      <h1>What do you want to do with this gun?:</h1>
+      <button class="button" onclick="copyGun()">Edit</button>
+      <button class="button" onclick="deleteGun()">Delete</button>
+      <button class="button" onclick="duplicateGun()">Duplicate</button>
+      <button class="button" onclick="cancelGunPopup()">Cancel</button>
     </div>
     
     <script src="main.js"></script>
