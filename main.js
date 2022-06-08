@@ -407,8 +407,6 @@ function drawGhostGun(length, width, aspect, x, y, angle, delay) { //draws a tra
     ctx.lineWidth = 8;
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
-    ctx.fillStyle = getColorTransparent("#ff0000")
-    ctx.strokeStyle = "#00000000";
     var drawSize = size / 3.6; //arbritrary value, need to figure out how the game actually determines what size to draw the gun
     drawTrapezoid(
         ctx,
@@ -774,26 +772,69 @@ function closestCirclePoint(x, y, cx, cy, r) { //finds the closest point on a ci
     return [cx + r * Math.cos(angle), cy + r * Math.sin(angle)];
 }
 
+var gunLength = 18
+var gunWidth = 8
+var gunAspect = 1
+var gunX = 0
+var gunY = 0
+var gunDelay = 0
+
+function updateGunLengthSlider() {
+    document.getElementById("gunLengthNum").value = document.getElementById("gunLength").value;
+}
+function updateGunWidthSlider() {
+    document.getElementById("gunWidthNum").value = document.getElementById("gunWidth").value;
+}
+function updateGunXSlider() {
+    document.getElementById("gunXNum").value = document.getElementById("gunX").value;
+}
+function updateGunYSlider() {
+    document.getElementById("gunYNum").value = document.getElementById("gunY").value;
+}
+
+function updateGunLengthNum() {
+    document.getElementById("gunLength").value = document.getElementById("gunLengthNum").value;
+}
+function updateGunWidthNum() {
+    document.getElementById("gunWidth").value = document.getElementById("gunWidthNum").value;
+}
+function updateGunXNum() {
+    document.getElementById("gunX").value = document.getElementById("gunXNum").value;
+}
+function updateGunYNum() {
+    document.getElementById("gunY").value = document.getElementById("gunYNum").value;
+}
+
+function updateGunSettings() {
+    gunLength = parseFloat(document.getElementById("gunLengthNum").value);
+    gunWidth = parseFloat(document.getElementById("gunWidthNum").value);
+    gunAspect = parseFloat(document.getElementById("gunAspect").value);
+    gunX = parseFloat(document.getElementById("gunXNum").value);
+    gunY = parseFloat(document.getElementById("gunYNum").value);
+    gunDelay = parseFloat(document.getElementById("gunDelay").value);
+}
+
 function barrelEditor() { //place guns on mouse down
     //check if the mouse is actually inside the canvas
     if (mouseX < canvas.width && mouseY < canvas.height && mouseX > 0 && mouseY > 0) {  
         var GNPLCgunAngle = Math.atan2(mouseY - canvas.height/2, mouseX - canvas.width/2);
-        var GNPLCdrawSize = size / 3.6; //arbritrary value, need to figure out how the game actually determines what size to draw the gun
-        var GNPLCclosestPointX = closestCirclePoint(mouseX, mouseY, canvas.width / 2, canvas.height / 2, size*2.8)[0];
-        var GNPLCclosestPointY = closestCirclePoint(mouseX, mouseY, canvas.width / 2, canvas.height / 2, size*2.8)[1];
-        var GNPLCplaceX   = 0//(closestPointX - canvas.width/2) / drawSize
-        var GNPLCplaceY   = 0//-(closestPointY - canvas.height/2) / drawSize
         var GNPLCgunAngle = GNPLCgunAngle * (180 / Math.PI);
         //snap angle to 15 degrees if holding shift
         if (keys["Shift"]) {
             GNPLCgunAngle = Math.round(GNPLCgunAngle / 15) * 15;
         }
-        drawGhostGun(  18,     8,      1,    GNPLCplaceX,  GNPLCplaceY,  GNPLCgunAngle,      0,   )
+        ctx.fillStyle = getColorTransparent("#ff0000")
+        ctx.strokeStyle = "#00000000";
+        drawGhostGun(  gunLength,     gunWidth,      gunAspect,    gunX,  gunY,  GNPLCgunAngle,      gunDelay,)
         if (isMouseJustDown()) {
-        guns.push(/***     LENGTH  WIDTH   ASPECT       X             Y            ANGLE         DELAY */
-            { POSITION:   [  18,     8,      1,    GNPLCplaceX,  GNPLCplaceY,  GNPLCgunAngle,      0,   ] }, 
+        guns.push(/***     LENGTH              WIDTH     ASPECT            X      Y        ANGLE             DELAY */
+            { POSITION:   [  gunLength,     gunWidth,      gunAspect,    gunX,  gunY,  GNPLCgunAngle,      gunDelay,   ] }, 
         )
         }
+    } else {
+        ctx.fillStyle = "#FF000044";
+        ctx.strokeStyle = "#00000000";
+        drawGhostGun(  gunLength,     gunWidth,      gunAspect,    gunX,  gunY,  0,      gunDelay,)
     }
 }
 
