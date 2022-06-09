@@ -409,8 +409,8 @@ function drawGuns(){ //Everything is fixed, just not sure if the units are the s
         var drawSize = size / 3.6; //arbritrary value, need to figure out how the game actually determines what size to draw the gun
         drawTrapezoid(
             ctx,
-            canvas.width / 2 + ((Math.cos(ANGLE) * (LENGTH / 2 + X))+(Math.cos(ANGLE+-1.5708) * (Y)))*drawSize, // x
-            canvas.height/ 2 + ((Math.sin(ANGLE) * (LENGTH / 2 + X))+(Math.sin(ANGLE+-1.5708) * (Y)))*drawSize, // y
+            canvas.width / 2 + ((Math.cos(ANGLE) * (LENGTH / 2 + X))+(Math.cos(ANGLE+-1.5708) * (-Y)))*drawSize, // x
+            canvas.height/ 2 + ((Math.sin(ANGLE) * (LENGTH / 2 + X))+(Math.sin(ANGLE+-1.5708) * (-Y)))*drawSize, // y
             drawSize * LENGTH / 2, // length
             drawSize * WIDTH / 2, // height
             ASPECT,
@@ -427,8 +427,8 @@ function drawGhostGun(length, width, aspect, x, y, angle, delay) { //draws a tra
     var drawSize = size / 3.6; //arbritrary value, need to figure out how the game actually determines what size to draw the gun
     drawTrapezoid(
         ctx,
-        canvas.width / 2 + ((Math.cos(angle) * (length / 2 + x))+(Math.cos(angle+-1.5708) * (y)))*drawSize, // x
-        canvas.height/ 2 + ((Math.sin(angle) * (length / 2 + x))+(Math.sin(angle+-1.5708) * (y)))*drawSize, // y
+        canvas.width / 2 + ((Math.cos(angle) * (length / 2 + x))+(Math.cos(angle+-1.5708) * (-y)))*drawSize, // x
+        canvas.height/ 2 + ((Math.sin(angle) * (length / 2 + x))+(Math.sin(angle+-1.5708) * (-y)))*drawSize, // y
         drawSize * length / 2, // length
         drawSize * width / 2, // height
         aspect,
