@@ -935,14 +935,13 @@ function barrelEditor() { //place guns on mouse down
                     LABEL: shootLabel,
                 }, }, 
             )
-            var mirroredText = null
-            if (shootLabel!=null) {mirroredText = " (mirrored)"}
+
             if(mirroredGuns){offsetDelay(); guns.push(/***     LENGTH              WIDTH     ASPECT            X      Y        ANGLE             DELAY */
                 { POSITION:   [  gunLength,     gunWidth,      gunAspect,    gunX,  -gunY,  -GNPLCgunAngle,      gunDelay,   ], 
                   PROPERTIES: {
                   SHOOT_SETTINGS: shootSettings,
                   TYPE: shootType,
-                  LABEL: shootLabel+mirroredText,
+                  LABEL: shootLabel,
                 }, }, 
             )}
             gunSelection()
