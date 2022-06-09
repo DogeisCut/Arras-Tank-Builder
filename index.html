@@ -21,7 +21,7 @@
         <img src="infoblurb.png" class="info" title ="The main properties that arent part of any sub catagory">
       </h1>
 
-      <p>Export: <input type="text" id="exportName" value="tank" placeholder="THIS IS REQUIRED">
+      <p>Unique ID: <input type="text" id="exportName" value="tank" placeholder="THIS IS REQUIRED">
         <img src="infoblurb.png" class="info" title ="Default: tank
         Essentally the ID of the tank, it should be unique and contain no spaces">
       </p>
@@ -257,12 +257,6 @@
     <!--LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY-->
     <div class="guns panel">
       <h1>Guns:</h1>
-      <p>Mirror Guns: <input type="checkbox" id="mirrorGuns" onclick="updateMirrorGuns()"> 
-        <img src="infoblurb.png" class="info" title ="Default: false
-        Places a second gun with a flipped angle and y offset"></p>
-      <p>Mirror Delay Offset: <input type="number" step="any" id="mirrorDelayOffset" value="0" onchange="updateMirrorDelayOffset()" oninput="updateMirrorDelayOffset()" disabled="true">
-        <img src="infoblurb.png" class="info" title ="Default: 0
-        Offset the delay of the second gun by this amount"></p>
       
       <p>Length: <input type="range" min="0" max="50" value="18" class="slider" id="gunLength" oninput="updateGunLengthSlider(); updateGunSettings();"> <input type="number" step="any" min="0" value="18" id="gunLengthNum" oninput="updateGunLengthNum(); updateGunSettings();">
         <img src="infoblurb.png" class="info" title ="Default: 18
@@ -310,7 +304,7 @@
       </h2>
       <ul>
         <li>Shoot Settings:
-        <input id="shootSettings" onclick="updateGunProperties()" value="g.basic"> <input type="checkbox" id="shootSettingsEnable" onclick="updateShootSettingsEnable()">
+        <input id="shootSettings" onclick="updateGunProperties()" value="g.basic" disabled="true"> <input type="checkbox" id="shootSettingsEnable" onclick="updateShootSettingsEnable(); updateGunProperties()">
         <img src="infoblurb.png" class="info" title ="Default: g.basic
         Defines the reload speed, accuracy, damage, and ect of the gun (not sure how to implement this yet)
         so for now just put a list of 12 numbers seperated by commas between square brackets.
@@ -329,7 +323,7 @@
         Resist: ¯\_(ツ)_/¯">
         </li>
         <li>Ammo Type:
-        <select id="shootType" onchange="updateGunProperties()">
+        <select id="shootType" onchange="updateGunProperties()" disabled="true">
           <option value="bullet">Bullets</option>
           <option value="casing">Shells (Shotgun Bullets)</option>
           <option value="flare">Flares (Unused)</option>
@@ -354,14 +348,24 @@
           <option value="minion">Minions (From Factory)</option>
           <option value="pillbox">Pillboxes (From Engineer)</option>
           <option value="turreteddrone">Turreted Drones (From Overdrive)</option>
-        </select> <input type="checkbox" id="shootTypeEnable" onclick="updateShootTypeEnable()">
+        </select>
         <img src="infoblurb.png" class="info" title ="Default: Bullets
-        Defines the type of ammo the gun fires">
+        Defines the type of ammo the gun fires, the above setting must be enabled!">
         </li>
-        <li>Label: <input type="text" id="shootLabel" oninput="updateGunProperties()" placeholder="Unnamed">
+        <li>Label: <input type="text" id="shootLabel" oninput="updateGunProperties()" placeholder="Unnamed" disabled="true"> <input type="checkbox" id="shootLabelEnable" onclick="updateShootLabelEnable(); updateGunProperties();">
         <img src="infoblurb.png" class="info" title ="Default: Unnamed
         The name of the gun, will show up when a player dies to the ammo shot from the gun">
         </li>
+      </ul>
+
+      <h2>Extra Settings:</h2>
+
+        <p>Mirror Guns: <input type="checkbox" id="mirrorGuns"> 
+          <img src="infoblurb.png" class="info" title ="Default: false
+          Places a second gun with a flipped angle and y offset"></p>
+        <p>Delay Offset: <input type="number" step="any" id="delayOffset" value="0" min="-1" max="1" onchange="updateDelayOffset()" oninput="updateDelayOffset()">
+          <img src="infoblurb.png" class="info" title ="Default: 0
+          Adds this amount to the delay for every gun placed"></p>
 
     </div>
 

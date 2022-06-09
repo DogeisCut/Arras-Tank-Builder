@@ -436,6 +436,24 @@ function drawGhostGun(length, width, aspect, x, y, angle, delay) { //draws a tra
     );
 }
 
+var shootSettings = null
+var shootType = null
+var shootLabel = null
+function updateGunProperties(){
+    if (document.getElementById("shootSettingsEnable").checked) {
+        shootSettings = document.getElementById("shootSettings").value;
+        shootType = document.getElementById("shootType").options[document.getElementById("shootType").selectedIndex].value;
+    } else {
+        shootSettings = null;
+        shootType = null;
+    }
+    if (document.getElementById("shootLabelEnable").checked) {
+        shootLabel = document.getElementById("shootLabel").value;
+    } else {
+        shootLabel = null;
+    }
+}
+
 
 function exportTank() { //Uses our varibles and sets "it" to the export code
     var exportName = document.getElementById("exportName").value;
@@ -598,10 +616,32 @@ function exportTank() { //Uses our varibles and sets "it" to the export code
         for (var i = 0; i < guns.length; i++) {
             var [LENGTH, WIDTH, ASPECT, X, Y, ANGLE, DELAY] = guns[i].POSITION;
             it += "{\n         POSITION: [ " + LENGTH + ", " + WIDTH + ", " + ASPECT + ", " + X + ", " + Y + ", " + ANGLE + ", " + DELAY + ", ],\n";
-            it += "      }, ";
+            var showProperties = false;
+            //PROPERTIES is an object
+            for (var j = 0; j < Object.keys(guns[i].PROPERTIES).length; j++) {
+                if (Object.values(guns[i].PROPERTIES)[j] != null) {
+                    showProperties = true;
+                    break;
+                }
+            }
+            if (showProperties) {
+                it += "         PROPERTIES: {\n";
+                if (guns[i].PROPERTIES.SHOOT_SETTINGS!=null) {
+                    it += "            SHOOT_SETTINGS: combineStats([" + guns[i].PROPERTIES.SHOOT_SETTINGS + "]),\n";
+                }
+                if (guns[i].PROPERTIES.TYPE!=null) {
+                    it += "            TYPE: exports." + guns[i].PROPERTIES.TYPE + ",\n";
+                }
+                if (guns[i].PROPERTIES.LABEL!=null) {
+                    it += "            LABEL: \'" + guns[i].PROPERTIES.LABEL + "\',\n";
+                }
+                it += "         }, }, ";
+            } else {
+            it += "         }, ";
+            }
         }
         
-        it += "\n   ],\n";
+        it += "\n     ],\n";
     }
 
     it += "};\n";
@@ -831,22 +871,42 @@ function updateGunSettings() {
     gunDelay = parseFloat(document.getElementById("gunDelay").value);
 }
 
-function updateMirrorGuns() {
-    var mirroredGuns = document.getElementById("mirrorGuns");
-    var mirrorDelayOffset = document.getElementById("mirrorDelayOffset");
-    mirrorDelayOffset.disabled = !mirroredGuns.checked;
+function updateShootSettingsEnable(){
+    var shootSettings = document.getElementById("shootSettings");
+    var shootType = document.getElementById("shootType");
+    var shootSettingsEnable = document.getElementById("shootSettingsEnable");
+    shootSettings.disabled = !shootSettingsEnable.checked;
+    shootType.disabled = !shootSettingsEnable.checked;
 }
+
+function updateShootLabelEnable(){
+    var shootLabel = document.getElementById("shootLabel");
+    var shootLabelEnable = document.getElementById("shootLabelEnable");
+    shootLabel.disabled = !shootLabelEnable.checked;
+}
+
 
 var highlightGunID = -1;
 
+function offsetDelay(){
+    gunDelay += parseFloat(document.getElementById("delayOffset").value);
+    gunDelay = gunDelay%1
+    gunDelay = Math.round(gunDelay*100000)/100000
+    document.getElementById("gunDelay").value = gunDelay;
+}
+
+function updateDelayOffset(){
+    gunDelay = -parseFloat(document.getElementById("delayOffset").value)
+    document.getElementById("gunDelay").value = gunDelay;
+}
+
 function barrelEditor() { //place guns on mouse down
     var mirroredGuns = document.getElementById("mirrorGuns").checked;
-    var mirrorDelayOffset = document.getElementById("mirrorDelayOffset").value;
     //check if the mouse is actually inside the canvas
     if (mouseX < canvas.width && mouseY < canvas.height && mouseX > 0 && mouseY > 0) {  
         var GNPLCgunAngle = Math.atan2(mouseY - canvas.height/2, mouseX - canvas.width/2);
         var GNPLCgunAngle = GNPLCgunAngle * (180 / Math.PI);
-        //snap angle to 15 degrees if holding shift
+        //snap angle to 7.5 degrees if holding shift
         if (keys["Shift"]) {
             GNPLCgunAngle = Math.round(GNPLCgunAngle / 7.5) * 7.5;
         }
@@ -854,23 +914,34 @@ function barrelEditor() { //place guns on mouse down
         ctx.strokeStyle = "#FF0000";
         if (highlightGunID == -1) {
         drawGhostGun(  gunLength,     gunWidth,      gunAspect,    gunX,  gunY,  GNPLCgunAngle,      gunDelay,)
-        if(mirroredGuns){drawGhostGun(  gunLength,     gunWidth,      gunAspect,    gunX,  -gunY,  -GNPLCgunAngle,      gunDelay + mirrorDelayOffset,)}
+        if(mirroredGuns){drawGhostGun(  gunLength,     gunWidth,      gunAspect,    gunX,  -gunY,  -GNPLCgunAngle,      gunDelay,)}
         }
         if (isMouseJustDown()) {
-        guns.push(/***     LENGTH              WIDTH     ASPECT            X      Y        ANGLE             DELAY */
-            { POSITION:   [  gunLength,     gunWidth,      gunAspect,    gunX,  gunY,  GNPLCgunAngle,      gunDelay,   ] }, 
-        )
-        if(mirroredGuns){guns.push(/***     LENGTH              WIDTH     ASPECT            X      Y        ANGLE             DELAY */
-            { POSITION:   [  gunLength,     gunWidth,      gunAspect,    gunX,  -gunY,  -GNPLCgunAngle,      gunDelay + mirrorDelayOffset,   ] }, 
-        )}
-        gunSelection()
-        }
+            offsetDelay()
+            guns.push(/***     LENGTH              WIDTH     ASPECT            X      Y        ANGLE             DELAY */
+                { POSITION:   [  gunLength,     gunWidth,      gunAspect,    gunX,  gunY,  GNPLCgunAngle,      gunDelay,   ],
+                  PROPERTIES: {
+                    SHOOT_SETTINGS: shootSettings,
+                    TYPE: shootType,
+                    LABEL: shootLabel,
+                }, }, 
+            )
+            if(mirroredGuns){offsetDelay(); guns.push(/***     LENGTH              WIDTH     ASPECT            X      Y        ANGLE             DELAY */
+                { POSITION:   [  gunLength,     gunWidth,      gunAspect,    gunX,  -gunY,  -GNPLCgunAngle,      gunDelay,   ], 
+                  PROPERTIES: {
+                  SHOOT_SETTINGS: shootSettings,
+                  TYPE: shootType,
+                  LABEL: shootLabel,
+                }, }, 
+            )}
+            gunSelection()
+            }
     } else {
         ctx.fillStyle = "#0000FF77";
         ctx.strokeStyle = "#0000FF";
         if (highlightGunID == -1) {
                          drawGhostGun(  gunLength,     gunWidth,      gunAspect,    gunX,  gunY,   0,      gunDelay,)
-        if(mirroredGuns){drawGhostGun(  gunLength,     gunWidth,      gunAspect,    gunX,  -gunY,  0,      gunDelay + mirrorDelayOffset,)}
+        if(mirroredGuns){drawGhostGun(  gunLength,     gunWidth,      gunAspect,    gunX,  -gunY,  0,      gunDelay,)}
         }
     }
     if (highlightGunID != -1) {
@@ -906,7 +977,12 @@ function gunSelection(){//Adds an option to the "guns" select box for every gun 
 
     for (var i = 0; i < guns.length; i++) {
         var option = document.createElement("option");
-        option.text = "Gun " + (i + 1) + " (Unnamed)";
+        option.text = "Gun " + (i + 1);
+        if (guns[i].PROPERTIES.LABEL!=null&&guns[i].PROPERTIES.LABEL!=='') {
+            option.text += " ("+guns[i].PROPERTIES.LABEL+")";
+        } else {
+            option.text += " (Unnamed)";
+        }
         option.value = i;
         gunsSelect.add(option);
     }
