@@ -46,6 +46,7 @@ var mouseUpY = false;
 var mouseDown = false;
 var mouseJustDown = false;
 var ignoreInput = false;
+var timer = 0;
 addEventListener("keydown", function (e) {
     if (ignoreInput) {
         return;
@@ -830,14 +831,21 @@ function updateGunSettings() {
     gunDelay = parseFloat(document.getElementById("gunDelay").value);
 }
 
+function updateMirrorGuns() {
+    var mirroredGuns = document.getElementById("mirrorGuns");
+    var mirrorDelayOffset = document.getElementById("mirrorDelayOffset");
+    mirrorDelayOffset.disabled = !mirroredGuns.checked;
+}
+
 var highlightGunID = -1;
 
 function barrelEditor() { //place guns on mouse down
+    var mirroredGuns = document.getElementById("mirrorGuns").checked;
+    var mirrorDelayOffset = document.getElementById("mirrorDelayOffset").value;
     //check if the mouse is actually inside the canvas
     if (mouseX < canvas.width && mouseY < canvas.height && mouseX > 0 && mouseY > 0) {  
         var GNPLCgunAngle = Math.atan2(mouseY - canvas.height/2, mouseX - canvas.width/2);
         var GNPLCgunAngle = GNPLCgunAngle * (180 / Math.PI);
-        var mirroredGuns = document.getElementById("mirrorGuns").checked;
         //snap angle to 15 degrees if holding shift
         if (keys["Shift"]) {
             GNPLCgunAngle = Math.round(GNPLCgunAngle / 7.5) * 7.5;
@@ -846,14 +854,14 @@ function barrelEditor() { //place guns on mouse down
         ctx.strokeStyle = "#FF0000";
         if (highlightGunID == -1) {
         drawGhostGun(  gunLength,     gunWidth,      gunAspect,    gunX,  gunY,  GNPLCgunAngle,      gunDelay,)
-        if(mirroredGuns&&GNPLCgunAngle!=0&&GNPLCgunAngle!=180){drawGhostGun(  gunLength,     gunWidth,      gunAspect,    gunX,  -gunY,  -GNPLCgunAngle,      gunDelay,)}
+        if(mirroredGuns){drawGhostGun(  gunLength,     gunWidth,      gunAspect,    gunX,  -gunY,  -GNPLCgunAngle,      gunDelay + mirrorDelayOffset,)}
         }
         if (isMouseJustDown()) {
         guns.push(/***     LENGTH              WIDTH     ASPECT            X      Y        ANGLE             DELAY */
             { POSITION:   [  gunLength,     gunWidth,      gunAspect,    gunX,  gunY,  GNPLCgunAngle,      gunDelay,   ] }, 
         )
-        if(mirroredGuns&&GNPLCgunAngle!=0&&GNPLCgunAngle!=180){guns.push(/***     LENGTH              WIDTH     ASPECT            X      Y        ANGLE             DELAY */
-            { POSITION:   [  gunLength,     gunWidth,      gunAspect,    gunX,  -gunY,  -GNPLCgunAngle,      gunDelay,   ] }, 
+        if(mirroredGuns){guns.push(/***     LENGTH              WIDTH     ASPECT            X      Y        ANGLE             DELAY */
+            { POSITION:   [  gunLength,     gunWidth,      gunAspect,    gunX,  -gunY,  -GNPLCgunAngle,      gunDelay + mirrorDelayOffset,   ] }, 
         )}
         gunSelection()
         }
@@ -861,12 +869,13 @@ function barrelEditor() { //place guns on mouse down
         ctx.fillStyle = "#0000FF77";
         ctx.strokeStyle = "#0000FF";
         if (highlightGunID == -1) {
-        drawGhostGun(  gunLength,     gunWidth,      gunAspect,    gunX,  gunY,  0,      gunDelay,)
+                         drawGhostGun(  gunLength,     gunWidth,      gunAspect,    gunX,  gunY,   0,      gunDelay,)
+        if(mirroredGuns){drawGhostGun(  gunLength,     gunWidth,      gunAspect,    gunX,  -gunY,  0,      gunDelay + mirrorDelayOffset,)}
         }
     }
     if (highlightGunID != -1) {
-        ctx.fillStyle = "#00FF0077";
-        ctx.strokeStyle = "#00FF00";
+        ctx.fillStyle = "#00FF00"//"rgba(0,255,0,"+(Math.cos(timer/30)+1)/5+")";
+        ctx.strokeStyle = "#00FF0077";
         var [highlightLength, highlightWidth, highlightAspect, highlightX, highlightY, highlightAngle, highlightDelay] = guns[highlightGunID].POSITION;
         drawGhostGun(  highlightLength,     highlightWidth,      highlightAspect,    highlightX,  highlightY,  highlightAngle,   highlightDelay,)
     }
@@ -937,6 +946,7 @@ function deleteGun() {
 function drawLoop(){ //Main loop that draws everything
     //fullscreenCanvas()
     //addRandomGuns()
+    timer++;
     ctx.fillStyle = color.normal.vlgrey
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     drawFacingLine();

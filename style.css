@@ -38,6 +38,18 @@ html, body {
   z-index: 9999;
 }
 
+.editorControls {
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  text-align: center;
+  z-index: 999;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-398px, 291px);
+}
+
 .main {
   justify-content: left;
   align-items: left;
@@ -173,6 +185,7 @@ button {
   margin-left: 0px;
   width: 12px;
   height: 12px; 
+  cursor: help;
 }
 
 /*Color Buttons*/

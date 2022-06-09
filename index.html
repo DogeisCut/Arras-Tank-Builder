@@ -9,7 +9,12 @@
   <body>
     <main>
     </main>
+    <div class="canvasContainer">
     <canvas id="canvas" width=800 height=600></canvas>
+    <img src="infoblurb.png" class="editorControls info" title ="Editor Controls:
+    Left Click: Place Gun
+    Shift: Snap to 7.5 degrees">
+    </div> 
     
     <div class="main panel">
       <h1>Main:
@@ -105,7 +110,7 @@
       Bound: Nothing uses it and again, I can't tell what it does.">
       </p>
 
-      <p>Size: <input type="range" min="0" max="100" value="12" id="size" class="slider" onchange="updateSize()" oninput="updateSize()"> <input type="number" min="0" value="12" id="sizeNumInput" onchange="updateSizeNum()" oninput="updateSizeNum()">
+      <p>Size: <input type="range" min="0" max="100" value="12" id="size" class="slider" onchange="updateSize()" oninput="updateSize()"> <input type="number" step="any" min="0" value="12" id="sizeNumInput" onchange="updateSizeNum()" oninput="updateSizeNum()">
         <img src="infoblurb.png" class="info" title ="Default: 12
         Defines the size of this entity, theres really no unit of measurement so just know that tanks are normally a size of 12 ">
       </p>
@@ -189,57 +194,57 @@
       </h2>
       <ul>
       <li>Acceleration:
-      <input type="number" id="acceleration" min="-10" max="10" value="1" onchange="updateAcceleration()" oninput="updateAcceleration()" disabled = "true"> <input type="checkbox" id="accelerationbasemulti" onclick="updateAcceleration()" checked="true" disabled = "true"> <input type="checkbox" id="accelerationenable" onclick="updateAcceleration()">
+      <input type="number" step="any" id="acceleration" min="-10" max="10" value="1" onchange="updateAcceleration()" oninput="updateAcceleration()" disabled = "true"> <input type="checkbox" id="accelerationbasemulti" onclick="updateAcceleration()" checked="true" disabled = "true"> <input type="checkbox" id="accelerationenable" onclick="updateAcceleration()">
       <img src="infoblurb.png" class="info" title ="Default: 1, true, false
       How long it takes for the tank to reach max speed">
       </li>
       <li>Speed:
-      <input type="number" id="speed" min="-10" max="10" value="1" onchange="updateSpeed()" oninput="updateSpeed()" disabled = "true"> <input type="checkbox" id="speedbasemulti" onclick="updateSpeed()" checked="true" disabled = "true"> <input type="checkbox" id="speedenable" onclick="updateSpeed()">
+      <input type="number" step="any" id="speed" min="-10" max="10" value="1" onchange="updateSpeed()" oninput="updateSpeed()" disabled = "true"> <input type="checkbox" id="speedbasemulti" onclick="updateSpeed()" checked="true" disabled = "true"> <input type="checkbox" id="speedenable" onclick="updateSpeed()">
       <img src="infoblurb.png" class="info" title ="Default: 1, true, false
       Max speed">
       </li>
       <li>Health:
-      <input type="number" id="health" min="-10" max="10" value="1" onchange="updateHealth()" oninput="updateHealth()" disabled = "true"> <input type="checkbox" id="healthbasemulti" onclick="updateHealth()" checked="true" disabled = "true"> <input type="checkbox" id="healthenable" onclick="updateHealth()">
+      <input type="number" step="any" id="health" min="-10" max="10" value="1" onchange="updateHealth()" oninput="updateHealth()" disabled = "true"> <input type="checkbox" id="healthbasemulti" onclick="updateHealth()" checked="true" disabled = "true"> <input type="checkbox" id="healthenable" onclick="updateHealth()">
       <img src="infoblurb.png" class="info" title ="Default: 1, true, false
       Take a guess">
       </li>
       <li>Damage:
-      <input type="number" id="damage" min="-10" max="10" value="1" onchange="updateDamage()" oninput="updateDamage()" disabled = "true"> <input type="checkbox" id="damagebasemulti" onclick="updateDamage()" checked="true" disabled = "true"> <input type="checkbox" id="damageenable" onclick="updateDamage()">
+      <input type="number" step="any" id="damage" min="-10" max="10" value="1" onchange="updateDamage()" oninput="updateDamage()" disabled = "true"> <input type="checkbox" id="damagebasemulti" onclick="updateDamage()" checked="true" disabled = "true"> <input type="checkbox" id="damageenable" onclick="updateDamage()">
       <img src="infoblurb.png" class="info" title ="Default: 1, true, false
       Does not define how much damage its guns do but in fact how much its body does">
       </li>
       <li>Penetration:
-      <input type="number" id="penetration" min="-10" max="10" value="1" onchange="updatePenetration()" oninput="updatePenetration()" disabled = "true"> <input type="checkbox" id="penetrationbasemulti" onclick="updatePenetration()" checked="true" disabled = "true"> <input type="checkbox" id="penetrationenable" onclick="updatePenetration()">
+      <input type="number" step="any" id="penetration" min="-10" max="10" value="1" onchange="updatePenetration()" oninput="updatePenetration()" disabled = "true"> <input type="checkbox" id="penetrationbasemulti" onclick="updatePenetration()" checked="true" disabled = "true"> <input type="checkbox" id="penetrationenable" onclick="updatePenetration()">
       <img src="infoblurb.png" class="info" title ="Default: 1, true, false
       How well this tank can go inside other targets">
       </li>
       <li>Shield:
-      <input type="number" id="shield" min="-10" max="10" value="1" onchange="updateShield()" oninput="updateShield()" disabled = "true"> <input type="checkbox" id="shieldbasemulti" onclick="updateShield()" checked="true" disabled = "true"> <input type="checkbox" id="shieldenable" onclick="updateShield()">
+      <input type="number" step="any" id="shield" min="-10" max="10" value="1" onchange="updateShield()" oninput="updateShield()" disabled = "true"> <input type="checkbox" id="shieldbasemulti" onclick="updateShield()" checked="true" disabled = "true"> <input type="checkbox" id="shieldenable" onclick="updateShield()">
       <img src="infoblurb.png" class="info" title ="Default: 1, true, false
       tbh idk why arras has this but imagine half life 2 sheild">
       </li>
       <li>Regen:
-      <input type="number" id="regen" min="-10" max="10" value="1" onchange="updateRegen()" oninput="updateRegen()" disabled = "true"> <input type="checkbox" id="regenbasemulti" onclick="updateRegen()" checked="true" disabled = "true"> <input type="checkbox" id="regenenable" onclick="updateRegen()">
+      <input type="number" step="any" id="regen" min="-10" max="10" value="1" onchange="updateRegen()" oninput="updateRegen()" disabled = "true"> <input type="checkbox" id="regenbasemulti" onclick="updateRegen()" checked="true" disabled = "true"> <input type="checkbox" id="regenenable" onclick="updateRegen()">
       <img src="infoblurb.png" class="info" title ="Default: 1, true, false
       How fast the sheild regenerates">
       </li>
       <li>FOV:
-      <input type="number" id="fov" min="-10" max="10" value="1" onchange="updateFOV()" oninput="updateFOV()" disabled = "true"> <input type="checkbox" id="fovbasemulti" onclick="updateFOV()" checked="true" disabled = "true"> <input type="checkbox" id="fovenable" onclick="updateFOV()">
+      <input type="number" step="any" id="fov" min="-10" max="10" value="1" onchange="updateFOV()" oninput="updateFOV()" disabled = "true"> <input type="checkbox" id="fovbasemulti" onclick="updateFOV()" checked="true" disabled = "true"> <input type="checkbox" id="fovenable" onclick="updateFOV()">
       <img src="infoblurb.png" class="info" title ="Default: 1, true, false
       values between 1 and 2 are recommended">
       </li>
       <li>Density:
-      <input type="number" id="density" min="-10" max="10" value="1" onchange="updateDensity()" oninput="updateDensity()" disabled = "true"> <input type="checkbox" id="densitybasemulti" onclick="updateDensity()" checked="true" disabled = "true"> <input type="checkbox" id="densityenable" onclick="updateDensity()">
+      <input type="number" step="any" id="density" min="-10" max="10" value="1" onchange="updateDensity()" oninput="updateDensity()" disabled = "true"> <input type="checkbox" id="densitybasemulti" onclick="updateDensity()" checked="true" disabled = "true"> <input type="checkbox" id="densityenable" onclick="updateDensity()">
       <img src="infoblurb.png" class="info" title ="Default: 1, true, false
       How CHONKY it is">
       </li>
       <li>Pushability:
-      <input type="number" id="pushability" min="-10" max="10" value="0.9" onchange="updatePushability()" oninput="updatePushability()" disabled = "true"> <input type="checkbox" id="pushabilityenable" onclick="updatePushability()">
+      <input type="number" step="any" id="pushability" min="-10" max="10" value="0.9" onchange="updatePushability()" oninput="updatePushability()" disabled = "true"> <input type="checkbox" id="pushabilityenable" onclick="updatePushability()">
       <img src="infoblurb.png" class="info" title ="Default: 0.9, false
       Defines how well other tanks can push it">
       </li>
       <li>Hetero:
-      <input type="number" id="hetero" min="-10" max="10" value="3" onchange="updateHetero()" oninput="updateHetero()" disabled = "true"> <input type="checkbox" id="heteroenable" onclick="updateHetero()">
+      <input type="number" step="any" id="hetero" min="-10" max="10" value="3" onchange="updateHetero()" oninput="updateHetero()" disabled = "true"> <input type="checkbox" id="heteroenable" onclick="updateHetero()">
       <img src="infoblurb.png" class="info" title ="Default: 3, false
       Higher hetero means that it will take more damage from the same class its in, so if its a tank, then it wil take more damage getting rammed by other tanks, but not from bullets.">
       </li>
@@ -252,13 +257,17 @@
     <div class="guns panel">
       <h1>Guns:</h1>
       <p>Mirror Guns: <input type="checkbox" id="mirrorGuns" onclick="updateMirrorGuns()"> 
-        <img src="infoblurb.png" class="info" title ="Places a second barrel with a flipped angle and y offset"></p>
+        <img src="infoblurb.png" class="info" title ="Default: false
+        Places a second gun with a flipped angle and y offset"></p>
+      <p>Mirror Delay Offset: <input type="number" step="any" id="mirrorDelayOffset" value="0" onchange="updateMirrorDelayOffset()" oninput="updateMirrorDelayOffset()" disabled="true">
+        <img src="infoblurb.png" class="info" title ="Default: 0
+        Offset the delay of the second gun by this amount"></p>
       
-      <p>Length: <input type="range" min="0" max="50" value="18" class="slider" id="gunLength" oninput="updateGunLengthSlider(); updateGunSettings();"> <input type="number" min="0" value="18" id="gunLengthNum" oninput="updateGunLengthNum(); updateGunSettings();">
+      <p>Length: <input type="range" min="0" max="50" value="18" class="slider" id="gunLength" oninput="updateGunLengthSlider(); updateGunSettings();"> <input type="number" step="any" min="0" value="18" id="gunLengthNum" oninput="updateGunLengthNum(); updateGunSettings();">
         <img src="infoblurb.png" class="info" title ="Default: 18
         The length of the gun">
       </p>
-      <p>Width: <input type="range" min="0" max="30" value="8" class="slider" id="gunWidth" oninput="updateGunWidthSlider(); updateGunSettings();"> <input type="number" min="0" value="8" id="gunWidthNum" oninput="updateGunWidthNum(); updateGunSettings();">
+      <p>Width: <input type="range" min="0" max="30" value="8" class="slider" id="gunWidth" oninput="updateGunWidthSlider(); updateGunSettings();"> <input type="number" step="any" min="0" value="8" id="gunWidthNum" oninput="updateGunWidthNum(); updateGunSettings();">
         <img src="infoblurb.png" class="info" title ="Default: 8
         The width of the gun">
       </p>
@@ -266,23 +275,46 @@
         <img src="infoblurb.png" class="info" title ="Default: 1
         Controls how much the gun 'bends'
         1 and -1: Normal
+        0: Invalid
         Below 1 above 0: Shrinks Tip
         Above 1: Enlarges Tip
         Below 0 above -1: Shrinks Base
         Below -1: Enlarges Base">
       </p>
-      <p>X Offset: <input type="range" min="-50" max="50" value="0" class="slider" id="gunX" oninput="updateGunXSlider(); updateGunSettings(); "> <input type="number" value="0" id="gunXNum" oninput="updateGunXNum(); updateGunSettings();">
+      <p>X Offset: <input type="range" min="-50" max="50" value="0" class="slider" id="gunX" oninput="updateGunXSlider(); updateGunSettings(); "> <input type="number" step="any" value="0" id="gunXNum" oninput="updateGunXNum(); updateGunSettings();">
         <img src="infoblurb.png" class="info" title ="Default: 0
         The x position of the gun relative to its rotation">
       </p>
-      <p>Y Offset: <input type="range" min="-50" max="50" value="0" class="slider" id="gunY" oninput="updateGunYSlider(); updateGunSettings(); "> <input type="number" value="0" id="gunYNum" oninput="updateGunYNum(); updateGunSettings();">
+      <p>Y Offset: <input type="range" min="-50" max="50" value="0" class="slider" id="gunY" oninput="updateGunYSlider(); updateGunSettings(); "> <input type="number" step="any" value="0" id="gunYNum" oninput="updateGunYNum(); updateGunSettings();">
         <img src="infoblurb.png" class="info" title ="Default: 0
         The y position of the gun relative to its rotation">
       </p>
-      <p>Delay: <input type="number" min="0" value="0" id="gunDelay" oninput="updateGunSettings()">
+      <p>Delay: <input type="number" step="any" min="0" value="0" id="gunDelay" oninput="updateGunSettings()">
         <img src="infoblurb.png" class="info" title ="Default: 0
         The delay before the gun fires, goes from 0 to 1, 1 taking one reload cycle before firing">
       </p>
+      <h2>Properties:
+        <img src="infoblurb.png" class="info" title ="The checkbox next to each option enables that option">
+      </h2>
+      <ul>
+        <li>Shoot Settings:
+        <input id="shootSettings" onclick="updateGunSettings()" value="g.basic">
+        <img src="infoblurb.png" class="info" title ="Default: g.basic
+        Defines the reload speed, accuracy, damage, and ect of the gun (not sure how to implement this yet)
+        so for now just put a list of 12 numbers seperated by commas between square brackets, or if you are advanced, put something like g.basic for the basic tank stats
+        Reload: How long it takes for the gun to shoot again
+        Recoil: How far back this gun pushes you when firing
+        Shudder: How much the speed of the ammo varies
+        Size: The size of the ammo
+        Health: How much damage the ammo can take before being removed
+        Penetration: How well the ammo can go through other targets
+        Speed: How fast the ammo comes out of the gun
+        Max speed: Maximum speed of the ammo
+        Range: How long the ammo lasts before being removed
+        Density: the ammo's density
+        Spray: accuracy
+        Resist: ¯\_(ツ)_/¯">
+        </li>
     </div>
 
     <div class="export panel">
@@ -292,9 +324,9 @@
 
     <div class="gunpopup panel" id="gunPopup" hidden="true">
       <h1>What do you want to do with this gun?:</h1>
-      <button class="button" onclick="copyGun()">Edit</button>
+      <button class="button" onclick="editGun()">Edit</button>
       <button class="button" onclick="deleteGun()">Delete</button>
-      <button class="button" onclick="duplicateGun()">Duplicate</button>
+      <button class="button" onclick="copySettingsGun()">Copy Settings</button>
       <button class="button" onclick="cancelGunPopup()">Cancel</button>
     </div>
 
