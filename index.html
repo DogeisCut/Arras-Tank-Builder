@@ -21,18 +21,18 @@
         <img src="infoblurb.png" class="info" title ="The main properties that arent part of any sub catagory">
       </h1>
 
-      <p>Export: <input type="text" id="exportName" value="tank">
+      <p>Export: <input type="text" id="exportName" value="tank" placeholder="THIS IS REQUIRED">
         <img src="infoblurb.png" class="info" title ="Default: tank
         Essentally the ID of the tank, it should be unique and contain no spaces">
       </p>
 
-      </p>Parent: <input type="text" id="parent" value="genericTank">
+      </p>Parent: <input type="text" id="parent" value="genericTank" placeholder="No Parent">
         <img src="infoblurb.png" class="info" title ="Default: genericTank
         Defines the parent entity of this entity, any properties of the parent will apply to this tank.
         for bosses you can use miniboss">
       </p>
 
-      </p>Label: <input type="text" id="label" value="Tank">
+      </p>Label: <input type="text" id="label" value="Tank" placeholder="Unnamed">
         <img src="infoblurb.png" class="info" title ="Default: Tank
         Defines the name of this entity, the name will show up in the leaderboard, upgrade menu, and where ever else.">
       </p>
@@ -117,7 +117,8 @@
 
       <p>Max Children: <input type="number" min="0" value="0" id="maxChildren">
         <img src="infoblurb.png" class="info" title ="Default: 0
-        Defines the maximum number of entities this entity can make, 0 is no limit">
+        Defines the maximum number of entities this entity can make, 0 is no limit
+        Use this to limit the amount of drones the tank can have.">
       </p>
 
       <p>Damage Effects: <input type="checkbox" id="damageEffects">
@@ -293,15 +294,27 @@
         <img src="infoblurb.png" class="info" title ="Default: 0
         The delay before the gun fires, goes from 0 to 1, 1 taking one reload cycle before firing">
       </p>
+
+      
+    <!--TYPE: exports.bullet,
+            LABEL: '',                  // def
+            STAT_CALCULATOR: 0,         // def
+            WAIT_TO_CYCLE: false,       // def
+            AUTOFIRE: false,            // def
+            SYNCS_SKILLS: false,        // def         
+            MAX_CHILDREN: 0,            // def  
+            ALT_FIRE: false,            // def 
+            NEGATIVE_RECOIL: false,     // def-->
       <h2>Properties:
-        <img src="infoblurb.png" class="info" title ="The checkbox next to each option enables that option">
+        <img src="infoblurb.png" class="info" title ="The checkbox next to each option enables that option, the first 2 options are required if you want the gun to actually shoot">
       </h2>
       <ul>
         <li>Shoot Settings:
-        <input id="shootSettings" onclick="updateGunSettings()" value="g.basic">
+        <input id="shootSettings" onclick="updateGunProperties()" value="g.basic"> <input type="checkbox" id="shootSettingsEnable" onclick="updateShootSettingsEnable()">
         <img src="infoblurb.png" class="info" title ="Default: g.basic
         Defines the reload speed, accuracy, damage, and ect of the gun (not sure how to implement this yet)
-        so for now just put a list of 12 numbers seperated by commas between square brackets, or if you are advanced, put something like g.basic for the basic tank stats
+        so for now just put a list of 12 numbers seperated by commas between square brackets.
+
         Reload: How long it takes for the gun to shoot again
         Recoil: How far back this gun pushes you when firing
         Shudder: How much the speed of the ammo varies
@@ -315,6 +328,41 @@
         Spray: accuracy
         Resist: ¯\_(ツ)_/¯">
         </li>
+        <li>Ammo Type:
+        <select id="shootType" onchange="updateGunProperties()">
+          <option value="bullet">Bullets</option>
+          <option value="casing">Shells (Shotgun Bullets)</option>
+          <option value="flare">Flares (Unused)</option>
+          <option value="swarm">Swarm Drones</option>
+          <option value="bee">Bee Drones (From Hives)</option>
+          <option value="autoswarm">Auto Swarm Drones (Does not follow mouse)</option>
+          <option value="accelbullet">Accelerating Bullets (Unused)</option>
+          <option value="growbullet">Growing Bullets (Unused)</option>
+          <option value="trap">Traps</option>
+          <option value="block">Blocks</option>
+          <option value="boomerang">Boomerangs (From Boomer)</option>
+          <option value="drone">Drones</option>
+          <option value="sunchip">Sunchips (From Necromancer)</option>
+          <option value="autosunchip">Auto Sunchips</option>
+          <option value="invissunchip">Invisible Sunchips (From Maleficitor)</option>
+          <option value="gunchip">Gunchips (Unused)</option>
+          <option value="missile">Missiles (From Skimmer)</option>
+          <option value="twistmissile">Twisty Missiles (From Twister)</option>
+          <option value="hypermissile">Hyper Missiles (From A Boss)</option>
+          <option value="snake">Snakes (From Sidewinder)</option>
+          <option value="hive">Hives (From Swarmer)</option>
+          <option value="minion">Minions (From Factory)</option>
+          <option value="pillbox">Pillboxes (From Engineer)</option>
+          <option value="turreteddrone">Turreted Drones (From Overdrive)</option>
+        </select> <input type="checkbox" id="shootTypeEnable" onclick="updateShootTypeEnable()">
+        <img src="infoblurb.png" class="info" title ="Default: Bullets
+        Defines the type of ammo the gun fires">
+        </li>
+        <li>Label: <input type="text" id="shootLabel" oninput="updateGunProperties()" placeholder="Unnamed">
+        <img src="infoblurb.png" class="info" title ="Default: Unnamed
+        The name of the gun, will show up when a player dies to the ammo shot from the gun">
+        </li>
+
     </div>
 
     <div class="export panel">
