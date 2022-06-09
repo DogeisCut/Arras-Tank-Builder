@@ -24,7 +24,7 @@ var color = {
         "border": 0.65
     }
 };
-
+//a
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
