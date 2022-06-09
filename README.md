@@ -7,3 +7,10 @@ A visual editor for creating tanks in arras.io private servers.
 - **z46-dev** - Made [arras-template](https://github.com/z46-dev/arras-template), allowed me to make this accurate
 - **IBlobTouch** - Made [iblobtouch.github.io](https://github.com/iblobtouch/iblobtouch.github.io), main inspiration
 - **Momentum Studios** - litterally arras.io
+
+# Adding Soon
+- Turrets
+- More properties for guns
+- Advanced settings
+- fixing shoot settings
+- Finishing the gun dropdown
