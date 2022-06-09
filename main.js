@@ -998,6 +998,7 @@ function updateGunsDropdown() {
     //change the dropdown back to select a gun, or if there are no guns, change it back to no guns
     if (guns.length == 0) {
         gunsSelect.selectedIndex = 1;
+        gunsSelect.disabled = true;
     } else {
         gunsSelect.selectedIndex = 0;
         document.getElementById("gunPopup").style.display = "block";
