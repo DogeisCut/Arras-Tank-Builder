@@ -412,3 +412,15 @@ button {
 .editbuttons {
   z-index: 5;
 }
+
+.logo {
+  position: absolute;
+  top: 6px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: fit-content;
+  height: fit-content;
+  text-align: center;
+}

@@ -454,11 +454,20 @@ function updateGunProperties(){
     }
 }
 
+function camelCaseString(string) {
+    return string.toLowerCase().replace(/\s(.)/g, function($1) { return $1.toUpperCase(); }).replace(/\s/g, '');
+}
+
 
 function exportTank() { //Uses our varibles and sets "it" to the export code
     var exportName = document.getElementById("exportName").value;
     var parent = document.getElementById("parent").value;
     var label = document.getElementById("label").value;
+
+    if (exportName == "") {
+        exportName = camelCaseString(label);
+    }
+
     var type = document.getElementById("type").value;
     var shape = document.getElementById("sides").value;
     var damageClass = document.getElementById("damageClass").value;
@@ -926,12 +935,14 @@ function barrelEditor() { //place guns on mouse down
                     LABEL: shootLabel,
                 }, }, 
             )
+            var mirroredText = null
+            if (shootLabel!=null) {mirroredText = " (mirrored)"}
             if(mirroredGuns){offsetDelay(); guns.push(/***     LENGTH              WIDTH     ASPECT            X      Y        ANGLE             DELAY */
                 { POSITION:   [  gunLength,     gunWidth,      gunAspect,    gunX,  -gunY,  -GNPLCgunAngle,      gunDelay,   ], 
                   PROPERTIES: {
                   SHOOT_SETTINGS: shootSettings,
                   TYPE: shootType,
-                  LABEL: shootLabel,
+                  LABEL: shootLabel+mirroredText,
                 }, }, 
             )}
             gunSelection()
@@ -994,7 +1005,11 @@ function gunSelection(){//Adds an option to the "guns" select box for every gun 
 var selectedGun = -1;
 function updateGunsDropdown() {
     var gunsSelect = document.getElementById("guns");
+    if (gunsSelect.selectedIndex == 0) {
+        return;
+    }
     selectedGun = gunsSelect.selectedIndex;
+    console.log(selectedGun)
     //change the dropdown back to select a gun, or if there are no guns, change it back to no guns
     if (guns.length == 0) {
         gunsSelect.selectedIndex = 1;
@@ -1003,7 +1018,7 @@ function updateGunsDropdown() {
         gunsSelect.selectedIndex = 0;
         document.getElementById("gunPopup").style.display = "block";
         ignoreInput = true;
-        highlightGunID = selectedGun;
+        highlightGunID = selectedGun-2;
     }
 }
 
@@ -1014,10 +1029,15 @@ function cancelGunPopup() {
 }
 
 function deleteGun() {
-    guns.splice(selectedGun, 1);
+    var gunsSelect = document.getElementById("guns");
+    guns.splice(selectedGun-2, 1);
     gunSelection();
     updateGunsDropdown();
     cancelGunPopup() 
+    if (guns.length == 0) {
+        gunsSelect.selectedIndex = 1;
+        gunsSelect.disabled = true;
+    }
 }
 
 function drawLoop(){ //Main loop that draws everything

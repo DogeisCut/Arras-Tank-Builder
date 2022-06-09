@@ -15,14 +15,20 @@
     Left Click: Place Gun
     Shift: Snap to 7.5 degrees">
     </div> 
-    
+
+    <div class="logo">
+      <img src="icon.png" alt="logo" width="100" height="100">
+      <h1>Cut's Arras Builder</h1>
+      Version: 1.0.0
+    </div>
+
     <div class="main panel">
       <h1>Main:
         <img src="infoblurb.png" class="info" title ="The main properties that arent part of any sub catagory">
       </h1>
 
-      <p>Unique ID: <input type="text" id="exportName" value="tank" placeholder="THIS IS REQUIRED">
-        <img src="infoblurb.png" class="info" title ="Default: tank
+      <p>Export Name: <input type="text" id="exportName" value="" placeholder="[Auto Generated From Label]">
+        <img src="infoblurb.png" class="info" title ="Default: [Auto Generated From Label]
         Essentally the ID of the tank, it should be unique and contain no spaces">
       </p>
 
@@ -251,7 +257,8 @@
       </li>
       </ul>
 
-      <h2>Enable Advanced Settings: <input type="checkbox" id="advSettings" onclick="updateAdvSettings()"> <img src="infoblurb.png" class="info" title ="Shows more properties to edit such as AI and controllers"></h2>
+      <h2>Enable Advanced Settings: <input type="checkbox" id="advSettings" onclick="updateAdvSettings()" disabled="true"> <img src="infoblurb.png" class="info" title ="Shows more properties to edit such as AI and controllers"></h2>
+      <p>Advanced settings are disabled until they are finished</p>
     </div>
 
     <!--LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY-->
@@ -356,6 +363,8 @@
         <img src="infoblurb.png" class="info" title ="Default: Unnamed
         The name of the gun, will show up when a player dies to the ammo shot from the gun">
         </li>
+        <li>Some properties are missing and will be added in a future update</li>
+
       </ul>
 
       <h2>Extra Settings:</h2>
@@ -365,7 +374,7 @@
           Places a second gun with a flipped angle and y offset"></p>
         <p>Delay Offset: <input type="number" step="any" id="delayOffset" value="0" min="-1" max="1" onchange="updateDelayOffset()" oninput="updateDelayOffset()">
           <img src="infoblurb.png" class="info" title ="Default: 0
-          Adds this amount to the delay for every gun placed"></p>
+          Adds this amount to the delay for every gun placed, including mirrored guns"></p>
 
     </div>
 
@@ -376,12 +385,13 @@
 
     <div class="gunpopup panel" id="gunPopup" hidden="true">
       <h1>What do you want to do with this gun?:</h1>
-      <button class="button" onclick="editGun()">Edit ✎</button>
+      <button class="button" onclick="editGun()" disabled="true">Edit ✎</button>
       <button class="button" onclick="deleteGun()">Delete 🗑</button>
-      <button class="button" onclick="copySettingsGun()">Copy Settings 🗎</button>
+      <button class="button" onclick="copySettingsGun()" disabled="true">Copy Settings 🗎</button>
       <button class="button" onclick="cancelGunPopup()">Cancel 🗙</button>
-      <button class="button" onclick="moveUpGun()">Move Up ▲</button>
-      <button class="button" onclick="moveDownGun()">Move Down ▼</button>
+      <button class="button" onclick="moveUpGun()" disabled="true">Move Up ▲</button>
+      <button class="button" onclick="moveDownGun()" disabled="true">Move Down ▼</button>
+      <p>Some buttons are disabled and will be added in a future update</p>
     </div>
 
     <div class="displaysettings panel" hidden="true">
