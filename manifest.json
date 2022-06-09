@@ -4,9 +4,8 @@
     "background_color": "#484948",
     "description": "A visual tank editor for arras.io private servers.",
     "orientation": "landscape",
-    "start_url": "/",
-    "scope": "/",
-    "display": "standalone",
+    "start_url": "index.html",
+    "display": "fullscreen",
     "icons": [{
         "src": "icon.png",
         "sizes": "192x192",
