@@ -657,6 +657,12 @@ function exportTank() { //Uses our varibles and sets "it" to the export code
     return it;
 }
 
+function importTank() {
+    var prompt = window.prompt("Paste the tank code here:");
+    if (prompt != null) {
+    }
+}
+
 /*BODY: { // def
         ACCELERATION: base.ACCEL,
         SPEED: base.SPEED,

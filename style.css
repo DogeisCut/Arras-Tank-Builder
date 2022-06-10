@@ -431,3 +431,11 @@ button {
   -moz-user-drag: none;
   -o-user-drag: none;
 }
+
+@media (max-width: 1775px) {
+  div {
+    zoom: 0.8; 
+    -moz-transform: scale(0.8); 
+    -moz-transform-origin: 0 0;
+  }
+}
