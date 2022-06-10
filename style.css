@@ -8,6 +8,7 @@ html, body {
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, -1px -1px black, -1px 1px black, 1px 1px black, 1px -1px black;
     border: none;
     margin: 5px;
+    --global-zoom: 1;
     -webkit-touch-callout: none;
     -webkit-user-select: none; 
      -khtml-user-select: none; 
@@ -433,17 +434,19 @@ button {
 }
 
 @media (max-width: 1775px) {
-  div {
+  html {
     zoom: 0.8; 
     -moz-transform: scale(0.8); 
     -moz-transform-origin: 0 0;
+    --global-zoom: 0.8;
   }
 }
 
 @media (max-width: 1424px) {
-  div {
+  html {
     zoom: 0.7; 
     -moz-transform: scale(0.7); 
     -moz-transform-origin: 0 0;
+    --global-zoom: 0.7;
   }
 }

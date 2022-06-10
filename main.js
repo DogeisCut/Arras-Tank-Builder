@@ -47,6 +47,7 @@ var mouseDown = false;
 var mouseJustDown = false;
 var ignoreInput = false;
 var timer = 0;
+var globalZoom = getComputedStyle(document.documentElement).getPropertyValue('--global-zoom');
 addEventListener("keydown", function (e) {
     if (ignoreInput) {
         return;
@@ -65,8 +66,9 @@ addEventListener("mousemove", function (e) {
     if (ignoreInput) {
         return;
     }
-    mouseX = e.clientX-canvas.offsetLeft+window.pageXOffset;
-    mouseY = e.clientY-canvas.offsetTop+window.pageYOffset;
+    globalZoom = getComputedStyle(document.documentElement).getPropertyValue('--global-zoom');
+    mouseX = (e.clientX/globalZoom-canvas.offsetLeft+window.pageXOffset);
+    mouseY = (e.clientY/globalZoom-canvas.offsetTop+window.pageYOffset);
 }
 );
 addEventListener("mousedown", function (e) {
