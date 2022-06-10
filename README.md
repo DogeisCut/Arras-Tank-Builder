@@ -15,3 +15,4 @@ A visual editor for creating tanks in arras.io private servers.
 - fixing shoot settings
 - Finishing the gun dropdown
 - Gun presets
+- Importing tanks
