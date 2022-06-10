@@ -439,3 +439,11 @@ button {
     -moz-transform-origin: 0 0;
   }
 }
+
+@media (max-width: 1424px) {
+  div {
+    zoom: 0.7; 
+    -moz-transform: scale(0.7); 
+    -moz-transform-origin: 0 0;
+  }
+}
