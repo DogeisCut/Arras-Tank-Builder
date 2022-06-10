@@ -925,6 +925,7 @@ function barrelEditor() { //place guns on mouse down
         if (keys["Shift"]) {
             GNPLCgunAngle = Math.round(GNPLCgunAngle / 7.5) * 7.5;
         }
+        GNPLCgunAngle = Math.round(GNPLCgunAngle / 0.5) * 0.5;
         ctx.fillStyle = getColorTransparent("#ff0000")
         ctx.strokeStyle = "#FF0000";
         if (highlightGunID == -1) {
