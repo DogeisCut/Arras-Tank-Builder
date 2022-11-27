@@ -1049,16 +1049,21 @@ function deleteGun() {
 }
 
 function drawLoop(){ //Main loop that draws everything
+    let screenshotMode = document.getElementById("screenshotMode").checked
     //fullscreenCanvas()
     //addRandomGuns()
     timer++;
     ctx.fillStyle = color.normal.vlgrey
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+    if (!screenshotMode){
     drawFacingLine();
+    }
     ctx.fillStyle = barrelColor
     ctx.strokeStyle = getColorDark(barrelColor);
     drawGuns()
+    if (!screenshotMode){
     barrelEditor()
+    }
     if (currentColor != "default") {
     ctx.fillStyle = currentColor;
     ctx.strokeStyle = getColorDark(currentColor);

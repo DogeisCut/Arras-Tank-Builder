@@ -24,11 +24,13 @@
     Left Click: Place Gun
     Shift: Snap to 7.5 degrees">
     </div> 
+    <p>Screenshot Mode: <input type="checkbox" id="screenshotMode">
+      <img src="infoblurb.png" class="info" title ="Default: false
+      Enable this to hide the line and gun display">
 
     <div class="logo">
       <img class="logoimg" src="icon.png" alt="logo" width="100" height="100">
       <h1>Cut's Arras Builder</h1>
-      Version: 1.0.5
     </div>
 
     <div class="main panel">
@@ -342,7 +344,7 @@
         </li>
         <li>Ammo Type:
         <select id="shootType" onchange="updateGunProperties()" disabled="true">
-          <option value="bullet">Bullets</option>
+          <option value="bullet" selected>Bullets</option>
           <option value="casing">Shells (Shotgun Bullets)</option>
           <option value="flare">Flares (Unused)</option>
           <option value="swarm">Swarm Drones</option>
@@ -374,7 +376,34 @@
         <img src="infoblurb.png" class="info" title ="Default: Unnamed
         The name of the gun, will show up when a player dies to the ammo shot from the gun">
         </li>
-        <li>Some properties are missing and will be added in a future update</li>
+        <li>Stat Calculator:
+          <select id="statCalculator" onchange="updateGunStatCalculator(); updateGunProperties()" disabled="true"> 
+            <option value="default" selected>Default</option>
+            <option value="bullet">Bullet</option>
+            <option value="drone">Drone</option>
+            <option value="swarm">Swarm</option>
+            <option value="fixedReload">Fixed Reload</option>
+            <option value="thruster">Thruster</option>
+            <option value="sustained">Sustained</option>
+            <option value="necro">Necro</option>
+            <option value="trap">Trap</option>
+          </select>
+          <input type="checkbox" id="statCalculatorEnable" onclick="updatestatCalculatorEnable(); updateGunProperties();">
+          <img src="infoblurb.png" class="info" title ="Default: DEFAULT WHAT DO YOU THINK?
+        Adds some extra stats/special properties to the ammo! This whole thing is a hunk of junk though.
+        
+        Default: No effects
+        Bullet: Identical to Default
+        Drone: Sets pushability to 1, Gives a ton of penetration, and does some other junk with health, damage, and range
+        Swarm: Gives a ton of penetration, Divides health by penetration
+        Fixed Reload: Seemingly does nothing?
+        Thruster: Makes the bullet speed also have effect in the recoil of the bullet's gun
+        Sustained: i know im the programmer and all but whatever out.RANGE = shoot.range; means. The sidewinder n stuff use it
+        Necro: Identical to drone
+        Trap: Identical to Default">
+        </li>
+        <li>dev note: pls finish adding all these before next update</li>
+        
 
       </ul>
 
