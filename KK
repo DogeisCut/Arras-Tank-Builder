@@ -1,0 +1,113 @@
+Class.tank = {
+    PARENT: "genericTank",
+    LABEL: "Tank",
+    DAMAGE_CLASS: 10000000,
+    DANGER: 10000000000000000000,
+    MOTION_TYPE: 'accel',
+    SIZE: 2,
+   BODY: {
+        ACCELERATION: base.ACCEL * 1000,
+        SPEED: base.SPEED * 10000,
+        HEALTH: base.HEALTH * 1000000000000000000000000000,
+        DAMAGE: base.DAMAGE * 100000000000000000,
+        PENETRATION: base.PENETRATION * 190000000000000000,
+        SHIELD: base.SHIELD * 1000000000000,
+        REGEN: base.REGEN * 10000000000000000000000000000,
+        FOV: base.FOV * 10000,
+        DENSITY: base.DENSITY * 100,
+        PUSHABILITY: 1,
+        HETERO: 3,
+    },
+    GUNS: [ 
+        {
+            POSITION: [50, 30, 1, 0, 0, 166.5, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic]),
+                TYPE: "hypermissile",
+            },
+        },
+        {
+            POSITION: [50, 30, 1, 0, 0, 165, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic]),
+                TYPE: "hypermissile",
+            },
+        },
+        {
+            POSITION: [50, 30, 1, 0, 0, 165, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic]),
+                TYPE: "hypermissile",
+            },
+        },
+        {
+            POSITION: [50, 30, 1, 0, 0, 165, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic]),
+                TYPE: "hypermissile",
+            },
+        },
+        {
+            POSITION: [50, 30, 1, 0, 0, 165, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic]),
+                TYPE: "hypermissile",
+            },
+        },
+        {
+            POSITION: [50, 30, 1, 0, 0, 165, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic]),
+                TYPE: "hypermissile",
+            },
+        },
+        {
+            POSITION: [50, 30, 1, 0, 0, 165, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic]),
+                TYPE: "hypermissile",
+            },
+        },
+        {
+            POSITION: [50, 30, 1, 0, 0, 163, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic]),
+                TYPE: "hypermissile",
+            },
+        },
+        {
+            POSITION: [50, 30, 1, 0, 0, 163, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic]),
+                TYPE: "hypermissile",
+            },
+        },
+        {
+            POSITION: [50, 30, 1, 0, 0, 163, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic]),
+                TYPE: "hypermissile",
+            },
+        },
+        {
+            POSITION: [50, 30, 1, 0, 0, 163, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic]),
+                TYPE: "hypermissile",
+            },
+        },
+        {
+            POSITION: [50, 30, 1, 0, 0, 163, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic]),
+                TYPE: "hypermissile",
+            },
+        },
+        {
+            POSITION: [50, 30, 1, 0, 0, 163, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic]),
+                TYPE: "hypermissile",
+            },
+        },
+        {
